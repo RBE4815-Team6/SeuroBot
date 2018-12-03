@@ -1,0 +1,23 @@
+\subsubsection usage Usage
+\verbatim
+<node name="constrained_ik" pkg="constrained_ik" type="constrained_ik">
+  <param name="debug_mode" type="bool" value="False" />
+  <param name="allow_joint_convergence" type="bool" value="False" />
+  <param name="allow_primary_normalization" type="bool" value="True" />
+  <param name="allow_auxiliary_nomalization" type="bool" value="True" />
+  <param name="limit_primary_motion" type="bool" value="False" />
+  <param name="limit_auxiliary_motion" type="bool" value="False" />
+  <param name="limit_auxiliary_interations" type="bool" value="False" />
+  <param name="solver_max_iterations" type="int" value="500" />
+  <param name="solver_min_iterations" type="int" value="0" />
+  <param name="primary_max_motion" type="double" value="2.0" />
+  <param name="auxiliary_max_iterations" type="int" value="5" />
+  <param name="auxiliary_max_motion" type="double" value="0.2" />
+  <param name="primary_norm" type="double" value="1.0" />
+  <param name="auxiliary_norm" type="double" value="0.2" />
+  <param name="primary_gain" type="double" value="1.0" />
+  <param name="auxiliary_gain" type="double" value="1.0" />
+  <param name="joint_convergence_tol" type="double" value="0.0001" />
+</node>
+\endverbatim
+

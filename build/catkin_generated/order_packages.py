@@ -2,4 +2,4 @@
 source_root_dir = "/home/avrs/seurobot_ws/src"
 whitelisted_packages = "".split(';') if "" != "" else []
 blacklisted_packages = "".split(';') if "" != "" else []
-underlay_workspaces = "/home/avrs/AVRS_ws/devel;/opt/ros/kinetic".split(';') if "/home/avrs/AVRS_ws/devel;/opt/ros/kinetic" != "" else []
+underlay_workspaces = "/home/avrs/seurobot_ws/devel;/home/avrs/AVRS_ws/devel;/opt/ros/kinetic".split(';') if "/home/avrs/seurobot_ws/devel;/home/avrs/AVRS_ws/devel;/opt/ros/kinetic" != "" else []

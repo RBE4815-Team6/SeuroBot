@@ -1,0 +1,8 @@
+prefix=/home/avrs/seurobot_ws/devel
+
+Name: industrial_moveit_benchmarking
+Description: Description of industrial_moveit_benchmarking
+Version: 0.1.1
+Cflags: 
+Libs: -L/home/avrs/seurobot_ws/devel/lib 
+Requires: 

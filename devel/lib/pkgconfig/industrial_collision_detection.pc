@@ -1,0 +1,8 @@
+prefix=/home/avrs/seurobot_ws/devel
+
+Name: industrial_collision_detection
+Description: Description of industrial_collision_detection
+Version: 0.1.1
+Cflags: -I/home/avrs/seurobot_ws/src/industrial_moveit/industrial_collision_detection/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include -I/usr/include/eigen3 -I/usr/include/pcl-1.7 -I/usr/include/ni -I/usr/include/vtk-6.2 -I/usr/include/x86_64-linux-gnu -I/usr/include/freetype2 -I/usr/include/jsoncpp -I/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent -I/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include -I/usr/lib/openmpi/include -I/usr/lib/openmpi/include/openmpi -I/usr/include/python2.7 -I/usr/include/libxml2 -I/usr/include/tcl
+Libs: -L/home/avrs/seurobot_ws/devel/lib -lindustrial_collision_detection
+Requires: roscpp moveit_core cmake_modules pluginlib pcl_ros

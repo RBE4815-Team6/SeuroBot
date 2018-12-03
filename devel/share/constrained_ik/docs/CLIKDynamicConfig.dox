@@ -1,0 +1,22 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~debug_mode" : \b [bool] Set the solver in a debug state. min: False, default: False, max: True
+- \b "~allow_joint_convergence" : \b [bool] Allow the solver to converge based on joint convergence. min: False, default: False, max: True
+- \b "~allow_primary_normalization" : \b [bool] Allow the solver to normalize primary motion. min: False, default: True, max: True
+- \b "~allow_auxiliary_nomalization" : \b [bool] Allow the solver to normalize auxiliary motion min: False, default: True, max: True
+- \b "~limit_primary_motion" : \b [bool] Allow the solver to limit the primary motion. min: False, default: False, max: True
+- \b "~limit_auxiliary_motion" : \b [bool] Allow the solver to limit the auxiliary motion. min: False, default: False, max: True
+- \b "~limit_auxiliary_interations" : \b [bool] Allow the solver to limit the number of auxiliary interation. min: False, default: False, max: True
+- \b "~solver_max_iterations" : \b [int] Solver's maximum number of iterations allowed. min: 1, default: 500, max: 2147483647
+- \b "~solver_min_iterations" : \b [int] Solver's minimum number of iterations required. min: 0, default: 0, max: 2147483647
+- \b "~primary_max_motion" : \b [double] Primary's maximum motion allowed. min: 0.0, default: 2.0, max: std::numeric_limits<double>::infinity()
+- \b "~auxiliary_max_iterations" : \b [int] Auxiliary's maximum number of iteration allowed. min: 0, default: 5, max: 2147483647
+- \b "~auxiliary_max_motion" : \b [double] Auxiliary's maximum motion allowed. min: 0.0, default: 0.2, max: std::numeric_limits<double>::infinity()
+- \b "~primary_norm" : \b [double] Normalize primary motion to set value. min: 0.0, default: 1.0, max: std::numeric_limits<double>::infinity()
+- \b "~auxiliary_norm" : \b [double] Normalize auxiliary motion to set value. min: 0.0, default: 0.2, max: std::numeric_limits<double>::infinity()
+- \b "~primary_gain" : \b [double] Solver's primary motion update gain. min: 0.0, default: 1.0, max: 1.0
+- \b "~auxiliary_gain" : \b [double] Solver's auxiliary motion update gain. min: 0.0, default: 1.0, max: 1.0
+- \b "~joint_convergence_tol" : \b [double] Solver's joint convergence tolerance. min: 0.0, default: 0.0001, max: std::numeric_limits<double>::infinity()
+
