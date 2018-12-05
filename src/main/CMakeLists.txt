@@ -15,6 +15,8 @@ COMPONENTS roscpp actionlib actionlib_msgs motion_msgs
 
 find_package(Boost REQUIRED COMPONENTS system)
 
+include_directories(include ${catkin_INCLUDE_DIRS})
+
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
@@ -27,8 +29,17 @@ catkin_python_setup()
 catkin_package(
   CATKIN_DEPENDS
     rospy
+    message_runtime
     motion_msgs	
 )
+add_dependencies(${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+## Mark executable scripts (Python etc.) for installation
+## in contrast to setup.py, you can choose the destination
+ install(PROGRAMS
+   scripts/main_node
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 #add_dependencies(main_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 

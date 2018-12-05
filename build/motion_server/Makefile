@@ -56,15 +56,16 @@ CMAKE_BINARY_DIR = /home/avrs/seurobot_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
 
-.PHONY : list_install_components/fast
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -76,6 +77,39 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # Special rule for the target install
 install: preinstall
@@ -89,49 +123,15 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
 
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,229 +166,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-motion_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-.PHONY : motion_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+motion_server/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule
 
 # Convenience name for target.
-sensor_msgs_generate_messages_py: motion_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+moveit_ros_manipulation_gencfg: motion_server/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule
 
-.PHONY : sensor_msgs_generate_messages_py
+.PHONY : moveit_ros_manipulation_gencfg
 
 # fast build rule for target.
-sensor_msgs_generate_messages_py/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
-.PHONY : sensor_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-.PHONY : motion_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_nodejs: motion_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
-.PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-.PHONY : motion_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_eus: motion_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_eus
-
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
-.PHONY : motion_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_cpp: motion_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_cpp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_cpp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
-.PHONY : tf2_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf_generate_messages_cpp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf_generate_messages_cpp.dir/rule
-.PHONY : motion_server/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_cpp: motion_server/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-.PHONY : tf_generate_messages_cpp
-
-# fast build rule for target.
-tf_generate_messages_cpp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/tf_generate_messages_cpp.dir/build
-.PHONY : tf_generate_messages_cpp/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-.PHONY : motion_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_cpp: motion_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_cpp
-
-# fast build rule for target.
-sensor_msgs_generate_messages_cpp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
-.PHONY : sensor_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf_generate_messages_eus.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf_generate_messages_eus.dir/rule
-.PHONY : motion_server/CMakeFiles/tf_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_eus: motion_server/CMakeFiles/tf_generate_messages_eus.dir/rule
-
-.PHONY : tf_generate_messages_eus
-
-# fast build rule for target.
-tf_generate_messages_eus/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf_generate_messages_eus.dir/build.make motion_server/CMakeFiles/tf_generate_messages_eus.dir/build
-.PHONY : tf_generate_messages_eus/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf_generate_messages_py.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf_generate_messages_py.dir/rule
-.PHONY : motion_server/CMakeFiles/tf_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_py: motion_server/CMakeFiles/tf_generate_messages_py.dir/rule
-
-.PHONY : tf_generate_messages_py
-
-# fast build rule for target.
-tf_generate_messages_py/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf_generate_messages_py.dir/build.make motion_server/CMakeFiles/tf_generate_messages_py.dir/build
-.PHONY : tf_generate_messages_py/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-.PHONY : motion_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_nodejs: motion_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-.PHONY : tf_generate_messages_nodejs
-
-# fast build rule for target.
-tf_generate_messages_nodejs/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/tf_generate_messages_nodejs.dir/build
-.PHONY : tf_generate_messages_nodejs/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-.PHONY : motion_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_lisp: motion_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_lisp
-
-# fast build rule for target.
-sensor_msgs_generate_messages_lisp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
-.PHONY : sensor_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-.PHONY : motion_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_lisp: motion_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_lisp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_lisp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
-.PHONY : tf2_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf_generate_messages_lisp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf_generate_messages_lisp.dir/rule
-.PHONY : motion_server/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_lisp: motion_server/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-.PHONY : tf_generate_messages_lisp
-
-# fast build rule for target.
-tf_generate_messages_lisp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/tf_generate_messages_lisp.dir/build
-.PHONY : tf_generate_messages_lisp/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-.PHONY : motion_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_nodejs: motion_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-tf2_msgs_generate_messages_nodejs/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
-.PHONY : tf2_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-.PHONY : motion_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_eus: motion_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_eus
-
-# fast build rule for target.
-tf2_msgs_generate_messages_eus/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
-.PHONY : tf2_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-motion_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-.PHONY : motion_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_py: motion_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_py
-
-# fast build rule for target.
-tf2_msgs_generate_messages_py/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
-.PHONY : tf2_msgs_generate_messages_py/fast
+moveit_ros_manipulation_gencfg/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_ros_manipulation_gencfg.dir/build.make motion_server/CMakeFiles/moveit_ros_manipulation_gencfg.dir/build
+.PHONY : moveit_ros_manipulation_gencfg/fast
 
 # Convenience name for target.
 motion_server/CMakeFiles/motion_server_node.dir/rule:
@@ -404,6 +194,546 @@ motion_server_node: motion_server/CMakeFiles/motion_server_node.dir/rule
 motion_server_node/fast:
 	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/motion_server_node.dir/build.make motion_server/CMakeFiles/motion_server_node.dir/build
 .PHONY : motion_server_node/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_nodejs: motion_server/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+octomap_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/build
+.PHONY : octomap_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_eus: motion_server/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_eus
+
+# fast build rule for target.
+octomap_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/octomap_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/octomap_msgs_generate_messages_eus.dir/build
+.PHONY : octomap_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_cpp: motion_server/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_cpp
+
+# fast build rule for target.
+octomap_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/build
+.PHONY : octomap_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+object_recognition_msgs_generate_messages_py: motion_server/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
+
+.PHONY : object_recognition_msgs_generate_messages_py
+
+# fast build rule for target.
+object_recognition_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/build
+.PHONY : object_recognition_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+object_recognition_msgs_generate_messages_lisp: motion_server/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : object_recognition_msgs_generate_messages_lisp
+
+# fast build rule for target.
+object_recognition_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/build
+.PHONY : object_recognition_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+object_recognition_msgs_generate_messages_eus: motion_server/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule
+
+.PHONY : object_recognition_msgs_generate_messages_eus
+
+# fast build rule for target.
+object_recognition_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/build
+.PHONY : object_recognition_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+moveit_msgs_generate_messages_nodejs: motion_server/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : moveit_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+moveit_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/build
+.PHONY : moveit_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_py: motion_server/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_py
+
+# fast build rule for target.
+octomap_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/octomap_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/octomap_msgs_generate_messages_py.dir/build
+.PHONY : octomap_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+moveit_msgs_generate_messages_lisp: motion_server/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : moveit_msgs_generate_messages_lisp
+
+# fast build rule for target.
+moveit_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/build
+.PHONY : moveit_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+moveit_msgs_generate_messages_eus: motion_server/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule
+
+.PHONY : moveit_msgs_generate_messages_eus
+
+# fast build rule for target.
+moveit_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/moveit_msgs_generate_messages_eus.dir/build
+.PHONY : moveit_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/graph_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/graph_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/graph_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+graph_msgs_generate_messages_nodejs: motion_server/CMakeFiles/graph_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : graph_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+graph_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/graph_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/graph_msgs_generate_messages_nodejs.dir/build
+.PHONY : graph_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+shape_msgs_generate_messages_eus: motion_server/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule
+
+.PHONY : shape_msgs_generate_messages_eus
+
+# fast build rule for target.
+shape_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/shape_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/shape_msgs_generate_messages_eus.dir/build
+.PHONY : shape_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_cpp: motion_server/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_cpp
+
+# fast build rule for target.
+visualization_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
+.PHONY : visualization_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_eus: motion_server/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_eus
+
+# fast build rule for target.
+visualization_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
+.PHONY : visualization_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+object_recognition_msgs_generate_messages_cpp: motion_server/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : object_recognition_msgs_generate_messages_cpp
+
+# fast build rule for target.
+object_recognition_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/build
+.PHONY : object_recognition_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_lisp: motion_server/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_lisp
+
+# fast build rule for target.
+visualization_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
+.PHONY : visualization_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+trajectory_msgs_generate_messages_nodejs: motion_server/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : trajectory_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+trajectory_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
+.PHONY : trajectory_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/graph_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/graph_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/graph_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+graph_msgs_generate_messages_lisp: motion_server/CMakeFiles/graph_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : graph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+graph_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/graph_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/graph_msgs_generate_messages_lisp.dir/build
+.PHONY : graph_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+object_recognition_msgs_generate_messages_nodejs: motion_server/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : object_recognition_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+object_recognition_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/build
+.PHONY : object_recognition_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+trajectory_msgs_generate_messages_lisp: motion_server/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : trajectory_msgs_generate_messages_lisp
+
+# fast build rule for target.
+trajectory_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
+.PHONY : trajectory_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_lisp: motion_server/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_lisp
+
+# fast build rule for target.
+octomap_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/build
+.PHONY : octomap_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+moveit_msgs_generate_messages_py: motion_server/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule
+
+.PHONY : moveit_msgs_generate_messages_py
+
+# fast build rule for target.
+moveit_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/moveit_msgs_generate_messages_py.dir/build
+.PHONY : moveit_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/graph_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/graph_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/graph_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+graph_msgs_generate_messages_eus: motion_server/CMakeFiles/graph_msgs_generate_messages_eus.dir/rule
+
+.PHONY : graph_msgs_generate_messages_eus
+
+# fast build rule for target.
+graph_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/graph_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/graph_msgs_generate_messages_eus.dir/build
+.PHONY : graph_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_nodejs: motion_server/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+visualization_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
+.PHONY : visualization_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule
+.PHONY : motion_server/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+shape_msgs_generate_messages_lisp: motion_server/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : shape_msgs_generate_messages_lisp
+
+# fast build rule for target.
+shape_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/shape_msgs_generate_messages_lisp.dir/build.make motion_server/CMakeFiles/shape_msgs_generate_messages_lisp.dir/build
+.PHONY : shape_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+trajectory_msgs_generate_messages_cpp: motion_server/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : trajectory_msgs_generate_messages_cpp
+
+# fast build rule for target.
+trajectory_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
+.PHONY : trajectory_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
+.PHONY : motion_server/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+trajectory_msgs_generate_messages_eus: motion_server/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
+
+.PHONY : trajectory_msgs_generate_messages_eus
+
+# fast build rule for target.
+trajectory_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make motion_server/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
+.PHONY : trajectory_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+trajectory_msgs_generate_messages_py: motion_server/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+
+.PHONY : trajectory_msgs_generate_messages_py
+
+# fast build rule for target.
+trajectory_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
+.PHONY : trajectory_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/graph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/graph_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/graph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+graph_msgs_generate_messages_cpp: motion_server/CMakeFiles/graph_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : graph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+graph_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/graph_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/graph_msgs_generate_messages_cpp.dir/build
+.PHONY : graph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+moveit_msgs_generate_messages_cpp: motion_server/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : moveit_msgs_generate_messages_cpp
+
+# fast build rule for target.
+moveit_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/build
+.PHONY : moveit_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/moveit_ros_planning_gencfg.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
+.PHONY : motion_server/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
+
+# Convenience name for target.
+moveit_ros_planning_gencfg: motion_server/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
+
+.PHONY : moveit_ros_planning_gencfg
+
+# fast build rule for target.
+moveit_ros_planning_gencfg/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/moveit_ros_planning_gencfg.dir/build.make motion_server/CMakeFiles/moveit_ros_planning_gencfg.dir/build
+.PHONY : moveit_ros_planning_gencfg/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/graph_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/graph_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/graph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+graph_msgs_generate_messages_py: motion_server/CMakeFiles/graph_msgs_generate_messages_py.dir/rule
+
+.PHONY : graph_msgs_generate_messages_py
+
+# fast build rule for target.
+graph_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/graph_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/graph_msgs_generate_messages_py.dir/build
+.PHONY : graph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule
+.PHONY : motion_server/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+shape_msgs_generate_messages_cpp: motion_server/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : shape_msgs_generate_messages_cpp
+
+# fast build rule for target.
+shape_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/shape_msgs_generate_messages_cpp.dir/build.make motion_server/CMakeFiles/shape_msgs_generate_messages_cpp.dir/build
+.PHONY : shape_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule
+.PHONY : motion_server/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+shape_msgs_generate_messages_nodejs: motion_server/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : shape_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+shape_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/build.make motion_server/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/build
+.PHONY : shape_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_py: motion_server/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_py
+
+# fast build rule for target.
+visualization_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
+.PHONY : visualization_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+motion_server/CMakeFiles/shape_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motion_server/CMakeFiles/shape_msgs_generate_messages_py.dir/rule
+.PHONY : motion_server/CMakeFiles/shape_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+shape_msgs_generate_messages_py: motion_server/CMakeFiles/shape_msgs_generate_messages_py.dir/rule
+
+.PHONY : shape_msgs_generate_messages_py
+
+# fast build rule for target.
+shape_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f motion_server/CMakeFiles/shape_msgs_generate_messages_py.dir/build.make motion_server/CMakeFiles/shape_msgs_generate_messages_py.dir/build
+.PHONY : shape_msgs_generate_messages_py/fast
 
 src/motion_server_node.o: src/motion_server_node.cpp.o
 
@@ -438,29 +768,51 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... sensor_msgs_generate_messages_py"
-	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... list_install_components"
-	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_cpp"
-	@echo "... tf_generate_messages_cpp"
-	@echo "... sensor_msgs_generate_messages_cpp"
-	@echo "... tf_generate_messages_eus"
-	@echo "... tf_generate_messages_py"
-	@echo "... tf_generate_messages_nodejs"
-	@echo "... sensor_msgs_generate_messages_lisp"
-	@echo "... tf2_msgs_generate_messages_lisp"
-	@echo "... edit_cache"
-	@echo "... tf_generate_messages_lisp"
-	@echo "... tf2_msgs_generate_messages_nodejs"
-	@echo "... install"
-	@echo "... tf2_msgs_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_py"
 	@echo "... rebuild_cache"
-	@echo "... install/strip"
+	@echo "... edit_cache"
 	@echo "... install/local"
-	@echo "... motion_server_node"
+	@echo "... install/strip"
+	@echo "... moveit_ros_manipulation_gencfg"
 	@echo "... test"
+	@echo "... motion_server_node"
+	@echo "... octomap_msgs_generate_messages_nodejs"
+	@echo "... octomap_msgs_generate_messages_eus"
+	@echo "... octomap_msgs_generate_messages_cpp"
+	@echo "... object_recognition_msgs_generate_messages_py"
+	@echo "... object_recognition_msgs_generate_messages_lisp"
+	@echo "... object_recognition_msgs_generate_messages_eus"
+	@echo "... moveit_msgs_generate_messages_nodejs"
+	@echo "... octomap_msgs_generate_messages_py"
+	@echo "... moveit_msgs_generate_messages_lisp"
+	@echo "... moveit_msgs_generate_messages_eus"
+	@echo "... graph_msgs_generate_messages_nodejs"
+	@echo "... shape_msgs_generate_messages_eus"
+	@echo "... visualization_msgs_generate_messages_cpp"
+	@echo "... visualization_msgs_generate_messages_eus"
+	@echo "... object_recognition_msgs_generate_messages_cpp"
+	@echo "... visualization_msgs_generate_messages_lisp"
+	@echo "... trajectory_msgs_generate_messages_nodejs"
+	@echo "... graph_msgs_generate_messages_lisp"
+	@echo "... object_recognition_msgs_generate_messages_nodejs"
+	@echo "... trajectory_msgs_generate_messages_lisp"
+	@echo "... install"
+	@echo "... octomap_msgs_generate_messages_lisp"
+	@echo "... moveit_msgs_generate_messages_py"
+	@echo "... graph_msgs_generate_messages_eus"
+	@echo "... list_install_components"
+	@echo "... visualization_msgs_generate_messages_nodejs"
+	@echo "... shape_msgs_generate_messages_lisp"
+	@echo "... trajectory_msgs_generate_messages_cpp"
+	@echo "... trajectory_msgs_generate_messages_eus"
+	@echo "... trajectory_msgs_generate_messages_py"
+	@echo "... graph_msgs_generate_messages_cpp"
+	@echo "... moveit_msgs_generate_messages_cpp"
+	@echo "... moveit_ros_planning_gencfg"
+	@echo "... graph_msgs_generate_messages_py"
+	@echo "... shape_msgs_generate_messages_cpp"
+	@echo "... shape_msgs_generate_messages_nodejs"
+	@echo "... visualization_msgs_generate_messages_py"
+	@echo "... shape_msgs_generate_messages_py"
 	@echo "... src/motion_server_node.o"
 	@echo "... src/motion_server_node.i"
 	@echo "... src/motion_server_node.s"

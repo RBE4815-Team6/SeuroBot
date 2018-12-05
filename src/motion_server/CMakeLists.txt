@@ -5,12 +5,16 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 
 find_package(catkin REQUIRED 
 COMPONENTS roscpp actionlib std_msgs actionlib_msgs motion_msgs
-tf)
+  roscpp
+  tf
+  rviz_visual_tools
+  moveit_visual_tools
+  moveit_ros_planning_interface)
 
 find_package(Boost REQUIRED COMPONENTS system)
 
 
-include_directories(include ${catkin_INCLUDE_DIRS} )#${Boost_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} )#${Boost_INCLUDE_DIRS} ${Eigen_INCLUDE_DIRS}
 
 
 #add_dependencies(

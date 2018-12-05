@@ -226,21 +226,6 @@ goal_orientation_example/fast:
 .PHONY : goal_orientation_example/fast
 
 # Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule
-
-# Convenience name for target.
-goal_mid_joint_example: industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule
-
-.PHONY : goal_mid_joint_example
-
-# fast build rule for target.
-goal_mid_joint_example/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/build
-.PHONY : goal_mid_joint_example/fast
-
-# Convenience name for target.
 industrial_moveit/constrained_ik/CMakeFiles/_run_tests_constrained_ik.dir/rule:
 	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/_run_tests_constrained_ik.dir/rule
 .PHONY : industrial_moveit/constrained_ik/CMakeFiles/_run_tests_constrained_ik.dir/rule
@@ -361,64 +346,19 @@ run_tests_constrained_ik_rostest_test_test_basic_kin.launch/fast:
 .PHONY : run_tests_constrained_ik_rostest_test_test_basic_kin.launch/fast
 
 # Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule
+industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule
+.PHONY : industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule
 
 # Convenience name for target.
-moveit_clik_planner_plugin: industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule
+run_tests_constrained_ik_rostest: industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule
 
-.PHONY : moveit_clik_planner_plugin
+.PHONY : run_tests_constrained_ik_rostest
 
 # fast build rule for target.
-moveit_clik_planner_plugin/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/build
-.PHONY : moveit_clik_planner_plugin/fast
-
-# Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule
-
-# Convenience name for target.
-constrained_ik_plugin: industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule
-
-.PHONY : constrained_ik_plugin
-
-# fast build rule for target.
-constrained_ik_plugin/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/build
-.PHONY : constrained_ik_plugin/fast
-
-# Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/moveit_ros_planning_gencfg.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
-
-# Convenience name for target.
-moveit_ros_planning_gencfg: industrial_moveit/constrained_ik/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
-
-.PHONY : moveit_ros_planning_gencfg
-
-# fast build rule for target.
-moveit_ros_planning_gencfg/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/moveit_ros_planning_gencfg.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/moveit_ros_planning_gencfg.dir/build
-.PHONY : moveit_ros_planning_gencfg/fast
-
-# Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule
-
-# Convenience name for target.
-constrained_ik: industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule
-
-.PHONY : constrained_ik
-
-# fast build rule for target.
-constrained_ik/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/build
-.PHONY : constrained_ik/fast
+run_tests_constrained_ik_rostest/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/build
+.PHONY : run_tests_constrained_ik_rostest/fast
 
 # Convenience name for target.
 industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_gencfg.dir/rule:
@@ -436,19 +376,19 @@ constrained_ik_gencfg/fast:
 .PHONY : constrained_ik_gencfg/fast
 
 # Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule
+industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule
+.PHONY : industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule
 
 # Convenience name for target.
-run_tests_constrained_ik_rostest: industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/rule
+moveit_clik_planner_plugin: industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/rule
 
-.PHONY : run_tests_constrained_ik_rostest
+.PHONY : moveit_clik_planner_plugin
 
 # fast build rule for target.
-run_tests_constrained_ik_rostest/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest.dir/build
-.PHONY : run_tests_constrained_ik_rostest/fast
+moveit_clik_planner_plugin/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/moveit_clik_planner_plugin.dir/build
+.PHONY : moveit_clik_planner_plugin/fast
 
 # Convenience name for target.
 industrial_moveit/constrained_ik/CMakeFiles/goal_tool_position_example.dir/rule:
@@ -466,6 +406,21 @@ goal_tool_position_example/fast:
 .PHONY : goal_tool_position_example/fast
 
 # Convenience name for target.
+industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule
+.PHONY : industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule
+
+# Convenience name for target.
+run_tests_constrained_ik_rostest_test_test_constrained_ik.launch: industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule
+
+.PHONY : run_tests_constrained_ik_rostest_test_test_constrained_ik.launch
+
+# fast build rule for target.
+run_tests_constrained_ik_rostest_test_test_constrained_ik.launch/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/build
+.PHONY : run_tests_constrained_ik_rostest_test_test_constrained_ik.launch/fast
+
+# Convenience name for target.
 industrial_moveit/constrained_ik/CMakeFiles/constraints_from_yaml_example.dir/rule:
 	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/constraints_from_yaml_example.dir/rule
 .PHONY : industrial_moveit/constrained_ik/CMakeFiles/constraints_from_yaml_example.dir/rule
@@ -481,19 +436,34 @@ constraints_from_yaml_example/fast:
 .PHONY : constraints_from_yaml_example/fast
 
 # Convenience name for target.
-industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule
-.PHONY : industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule
+industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule
+.PHONY : industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule
 
 # Convenience name for target.
-run_tests_constrained_ik_rostest_test_test_constrained_ik.launch: industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/rule
+constrained_ik_plugin: industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/rule
 
-.PHONY : run_tests_constrained_ik_rostest_test_test_constrained_ik.launch
+.PHONY : constrained_ik_plugin
 
 # fast build rule for target.
-run_tests_constrained_ik_rostest_test_test_constrained_ik.launch/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/run_tests_constrained_ik_rostest_test_test_constrained_ik.launch.dir/build
-.PHONY : run_tests_constrained_ik_rostest_test_test_constrained_ik.launch/fast
+constrained_ik_plugin/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/constrained_ik_plugin.dir/build
+.PHONY : constrained_ik_plugin/fast
+
+# Convenience name for target.
+industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule
+.PHONY : industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule
+
+# Convenience name for target.
+constrained_ik: industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/rule
+
+.PHONY : constrained_ik
+
+# fast build rule for target.
+constrained_ik/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/constrained_ik.dir/build
+.PHONY : constrained_ik/fast
 
 # Convenience name for target.
 industrial_moveit/constrained_ik/CMakeFiles/goal_tool_orientation_example.dir/rule:
@@ -629,6 +599,21 @@ avoid_obstacles_example: industrial_moveit/constrained_ik/CMakeFiles/avoid_obsta
 avoid_obstacles_example/fast:
 	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/avoid_obstacles_example.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/avoid_obstacles_example.dir/build
 .PHONY : avoid_obstacles_example/fast
+
+# Convenience name for target.
+industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule
+.PHONY : industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule
+
+# Convenience name for target.
+goal_mid_joint_example: industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/rule
+
+.PHONY : goal_mid_joint_example
+
+# fast build rule for target.
+goal_mid_joint_example/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/build.make industrial_moveit/constrained_ik/CMakeFiles/goal_mid_joint_example.dir/build
+.PHONY : goal_mid_joint_example/fast
 
 examples/avoid_joint_limits_example.o: examples/avoid_joint_limits_example.cpp.o
 
@@ -1670,7 +1655,6 @@ help:
 	@echo "... goal_zero_jvel_example"
 	@echo "... goal_tool_pointing_example"
 	@echo "... goal_orientation_example"
-	@echo "... goal_mid_joint_example"
 	@echo "... _run_tests_constrained_ik"
 	@echo "... _run_tests_constrained_ik_rostest"
 	@echo "... run_tests_constrained_ik"
@@ -1679,15 +1663,14 @@ help:
 	@echo "... constrained_ik_moveit"
 	@echo "... constrained_ik_constraints"
 	@echo "... run_tests_constrained_ik_rostest_test_test_basic_kin.launch"
-	@echo "... moveit_clik_planner_plugin"
-	@echo "... constrained_ik_plugin"
-	@echo "... moveit_ros_planning_gencfg"
-	@echo "... constrained_ik"
-	@echo "... constrained_ik_gencfg"
 	@echo "... run_tests_constrained_ik_rostest"
+	@echo "... constrained_ik_gencfg"
+	@echo "... moveit_clik_planner_plugin"
 	@echo "... goal_tool_position_example"
-	@echo "... constraints_from_yaml_example"
 	@echo "... run_tests_constrained_ik_rostest_test_test_constrained_ik.launch"
+	@echo "... constraints_from_yaml_example"
+	@echo "... constrained_ik_plugin"
+	@echo "... constrained_ik"
 	@echo "... install"
 	@echo "... goal_tool_orientation_example"
 	@echo "... goal_position_example"
@@ -1700,6 +1683,7 @@ help:
 	@echo "... test_constrained_ik"
 	@echo "... _run_tests_constrained_ik_rostest_test_test_constrained_ik.launch"
 	@echo "... avoid_obstacles_example"
+	@echo "... goal_mid_joint_example"
 	@echo "... examples/avoid_joint_limits_example.o"
 	@echo "... examples/avoid_joint_limits_example.i"
 	@echo "... examples/avoid_joint_limits_example.s"

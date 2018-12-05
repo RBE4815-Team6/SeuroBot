@@ -56,60 +56,16 @@ CMAKE_BINARY_DIR = /home/avrs/seurobot_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target test
 test:
@@ -122,16 +78,60 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target install/local
+install/local/fast: install/local
 
-.PHONY : rebuild_cache/fast
+.PHONY : install/local/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,141 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-trajectory_msgs_generate_messages_nodejs: abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : trajectory_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-trajectory_msgs_generate_messages_nodejs/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
-.PHONY : trajectory_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-trajectory_msgs_generate_messages_lisp: abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : trajectory_msgs_generate_messages_lisp
-
-# fast build rule for target.
-trajectory_msgs_generate_messages_lisp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
-.PHONY : trajectory_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-trajectory_msgs_generate_messages_cpp: abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : trajectory_msgs_generate_messages_cpp
-
-# fast build rule for target.
-trajectory_msgs_generate_messages_cpp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
-.PHONY : trajectory_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-industrial_msgs_generate_messages_py: abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule
-
-.PHONY : industrial_msgs_generate_messages_py
-
-# fast build rule for target.
-industrial_msgs_generate_messages_py/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/build.make abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/build
-.PHONY : industrial_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-control_msgs_generate_messages_py: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule
-
-.PHONY : control_msgs_generate_messages_py
-
-# fast build rule for target.
-control_msgs_generate_messages_py/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/build
-.PHONY : control_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-industrial_msgs_generate_messages_nodejs: abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : industrial_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-industrial_msgs_generate_messages_nodejs/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/build.make abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/build
-.PHONY : industrial_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-control_msgs_generate_messages_eus: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
-
-.PHONY : control_msgs_generate_messages_eus
-
-# fast build rule for target.
-control_msgs_generate_messages_eus/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/build
-.PHONY : control_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-control_msgs_generate_messages_lisp: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : control_msgs_generate_messages_lisp
-
-# fast build rule for target.
-control_msgs_generate_messages_lisp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/build
-.PHONY : control_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-trajectory_msgs_generate_messages_eus: abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
-
-.PHONY : trajectory_msgs_generate_messages_eus
-
-# fast build rule for target.
-trajectory_msgs_generate_messages_eus/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
-.PHONY : trajectory_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
 abb/abb_driver/CMakeFiles/abb_driver_motion_download_interface.dir/rule:
 	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/abb_driver_motion_download_interface.dir/rule
 .PHONY : abb/abb_driver/CMakeFiles/abb_driver_motion_download_interface.dir/rule
@@ -314,6 +179,21 @@ abb_driver_motion_download_interface: abb/abb_driver/CMakeFiles/abb_driver_motio
 abb_driver_motion_download_interface/fast:
 	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/abb_driver_motion_download_interface.dir/build.make abb/abb_driver/CMakeFiles/abb_driver_motion_download_interface.dir/build
 .PHONY : abb_driver_motion_download_interface/fast
+
+# Convenience name for target.
+abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule
+
+# Convenience name for target.
+abb_driver_robot_state: abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule
+
+.PHONY : abb_driver_robot_state
+
+# fast build rule for target.
+abb_driver_robot_state/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/build.make abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/build
+.PHONY : abb_driver_robot_state/fast
 
 # Convenience name for target.
 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_nodejs.dir/rule:
@@ -331,19 +211,79 @@ control_msgs_generate_messages_nodejs/fast:
 .PHONY : control_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-trajectory_msgs_generate_messages_py: abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+control_msgs_generate_messages_cpp: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
 
-.PHONY : trajectory_msgs_generate_messages_py
+.PHONY : control_msgs_generate_messages_cpp
 
 # fast build rule for target.
-trajectory_msgs_generate_messages_py/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make abb/abb_driver/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
-.PHONY : trajectory_msgs_generate_messages_py/fast
+control_msgs_generate_messages_cpp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/build
+.PHONY : control_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+control_msgs_generate_messages_lisp: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : control_msgs_generate_messages_lisp
+
+# fast build rule for target.
+control_msgs_generate_messages_lisp/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_lisp.dir/build
+.PHONY : control_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+control_msgs_generate_messages_eus: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
+
+.PHONY : control_msgs_generate_messages_eus
+
+# fast build rule for target.
+control_msgs_generate_messages_eus/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_eus.dir/build
+.PHONY : control_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+industrial_msgs_generate_messages_nodejs: abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : industrial_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+industrial_msgs_generate_messages_nodejs/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/build.make abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_nodejs.dir/build
+.PHONY : industrial_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+control_msgs_generate_messages_py: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/rule
+
+.PHONY : control_msgs_generate_messages_py
+
+# fast build rule for target.
+control_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_py.dir/build
+.PHONY : control_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_cpp.dir/rule:
@@ -391,34 +331,19 @@ industrial_msgs_generate_messages_lisp/fast:
 .PHONY : industrial_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule
+abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule
+.PHONY : abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-abb_driver_robot_state: abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/rule
+industrial_msgs_generate_messages_py: abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/rule
 
-.PHONY : abb_driver_robot_state
+.PHONY : industrial_msgs_generate_messages_py
 
 # fast build rule for target.
-abb_driver_robot_state/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/build.make abb/abb_driver/CMakeFiles/abb_driver_robot_state.dir/build
-.PHONY : abb_driver_robot_state/fast
-
-# Convenience name for target.
-abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f CMakeFiles/Makefile2 abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
-.PHONY : abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-control_msgs_generate_messages_cpp: abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : control_msgs_generate_messages_cpp
-
-# fast build rule for target.
-control_msgs_generate_messages_cpp/fast:
-	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/build.make abb/abb_driver/CMakeFiles/control_msgs_generate_messages_cpp.dir/build
-.PHONY : control_msgs_generate_messages_cpp/fast
+industrial_msgs_generate_messages_py/fast:
+	cd /home/avrs/seurobot_ws/build && $(MAKE) -f abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/build.make abb/abb_driver/CMakeFiles/industrial_msgs_generate_messages_py.dir/build
+.PHONY : industrial_msgs_generate_messages_py/fast
 
 src/abb_joint_downloader_node.o: src/abb_joint_downloader_node.cpp.o
 
@@ -510,30 +435,25 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install"
-	@echo "... trajectory_msgs_generate_messages_nodejs"
-	@echo "... install/strip"
-	@echo "... trajectory_msgs_generate_messages_lisp"
-	@echo "... trajectory_msgs_generate_messages_cpp"
-	@echo "... list_install_components"
-	@echo "... industrial_msgs_generate_messages_py"
-	@echo "... control_msgs_generate_messages_py"
-	@echo "... industrial_msgs_generate_messages_nodejs"
-	@echo "... control_msgs_generate_messages_eus"
-	@echo "... control_msgs_generate_messages_lisp"
-	@echo "... trajectory_msgs_generate_messages_eus"
+	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... abb_driver_motion_download_interface"
-	@echo "... edit_cache"
+	@echo "... install/local"
+	@echo "... abb_driver_robot_state"
+	@echo "... install"
 	@echo "... control_msgs_generate_messages_nodejs"
-	@echo "... trajectory_msgs_generate_messages_py"
+	@echo "... edit_cache"
+	@echo "... control_msgs_generate_messages_cpp"
+	@echo "... control_msgs_generate_messages_lisp"
+	@echo "... control_msgs_generate_messages_eus"
+	@echo "... list_install_components"
+	@echo "... install/strip"
+	@echo "... industrial_msgs_generate_messages_nodejs"
+	@echo "... control_msgs_generate_messages_py"
 	@echo "... industrial_msgs_generate_messages_cpp"
 	@echo "... industrial_msgs_generate_messages_eus"
 	@echo "... industrial_msgs_generate_messages_lisp"
-	@echo "... abb_driver_robot_state"
-	@echo "... control_msgs_generate_messages_cpp"
-	@echo "... install/local"
-	@echo "... test"
-	@echo "... rebuild_cache"
+	@echo "... industrial_msgs_generate_messages_py"
 	@echo "... src/abb_joint_downloader_node.o"
 	@echo "... src/abb_joint_downloader_node.i"
 	@echo "... src/abb_joint_downloader_node.s"

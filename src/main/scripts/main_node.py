@@ -3,12 +3,15 @@
 from __future__ import print_function # Lets you print like Python 3
 import rospy
 import actionlib
-#import simple_action_example.msg
-#from motion_action_server import MoveRobot.msg
-#import MoveRobot.msg
-#import motion_action_server.msg
+# import simple_action_example.msg
+# from motion_action_server import MoveRobot.msg
+# import MoveRobot.msg
+# import motion_action_server.msg
+#import motion_msgs.msg  # import MoveRobotAction
+
 import motion_msgs
-import motion_msgs.msg #import MoveRobotAction
+from motion_msgs.msg import MoveRobotAction
+
 
 def main_node():
     # SimpleActionClient construction, targeting the fibonacci topic of type Fibonacci
@@ -21,8 +24,7 @@ def main_node():
 
     # Creates a goal to send to the action server.
     goal = motion_msgs.msg.MoveRobotAction()
-    goal.x=1
-
+    # goal.yaw = 1
 
     # Sends the goal to the action server.
     client.send_goal(goal)
@@ -32,6 +34,7 @@ def main_node():
 
     # Prints out the result of executing the action
     return client.get_result()  # A FibonacciResult
+
 
 if __name__ == '__main__':
     print("Client Running")

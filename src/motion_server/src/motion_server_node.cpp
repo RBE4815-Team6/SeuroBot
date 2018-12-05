@@ -1,4 +1,4 @@
-/* AVRS-MQP: motion_action_server_msgs -g
+/* AVRS-MQP: motion_msgs -g
  *  Maintainer: avrs.mqp@gmail.com
  *  Authors: Nikolas Gamarra, Ryan O'Brien
  */
@@ -21,8 +21,6 @@
 //#include <moveit/planning_interface/move_group.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 
-
-
 #include <motion_msgs/MoveRobotAction.h>
 
 //general
@@ -33,11 +31,11 @@ class MoveRobotAction
   protected:
 
     ros::NodeHandle nh_;
-    actionlib::SimpleActionServer<motion_action_server_msgs::MoveRobotAction> as_; // NodeHandle instance must be created before this line. Otherwise strange error occurs.
+    actionlib::SimpleActionServer<motion_msgs::MoveRobotAction> as_; // NodeHandle instance must be created before this line. Otherwise strange error occurs.
     std::string action_name_;
     // create messages that are used to published feedback/result
-    motion_action_server_msgs::MoveRobotFeedback feedback_;
-    motion_action_server_msgs::MoveRobotResult result_;
+    motion_msgs::MoveRobotFeedback feedback_;
+    motion_msgs::MoveRobotResult result_;
 
   public:
 
@@ -52,7 +50,7 @@ class MoveRobotAction
     {
     }
 
-    void executeCB(const motion_action_server_msgs::MoveRobotGoalConstPtr &goal)
+    void executeCB(const motion_msgs::MoveRobotGoalConstPtr &goal)
     {
       // helper variables
       ros::Rate r(1);
