@@ -1,2 +1,0 @@
-set(motion_msgs_MESSAGE_FILES "/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotAction.msg;/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotActionGoal.msg;/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotActionResult.msg;/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotActionFeedback.msg;/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotGoal.msg;/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotResult.msg;/home/avrs/seurobot_ws/devel/share/motion_msgs/msg/MoveRobotFeedback.msg")
-set(motion_msgs_SERVICE_FILES "")

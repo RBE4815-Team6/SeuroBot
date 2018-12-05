@@ -1,8 +1,0 @@
-prefix=/home/avrs/seurobot_ws/devel
-
-Name: stomp_plugins
-Description: Description of stomp_plugins
-Version: 0.1.1
-Cflags: -I/home/avrs/seurobot_ws/src/industrial_moveit/stomp_plugins/include -I/usr/include/eigen3
-Libs: -L/home/avrs/seurobot_ws/devel/lib -lstomp_plugins
-Requires: moveit_ros_planning moveit_core stomp_core stomp_moveit cmake_modules pluginlib roscpp

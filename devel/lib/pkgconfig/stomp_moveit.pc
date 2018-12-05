@@ -1,8 +1,0 @@
-prefix=/home/avrs/seurobot_ws/devel
-
-Name: stomp_moveit
-Description: Description of stomp_moveit
-Version: 0.1.1
-Cflags: -I/home/avrs/seurobot_ws/src/industrial_moveit/stomp_moveit/include -I/usr/include/eigen3
-Libs: -L/home/avrs/seurobot_ws/devel/lib -lstomp_moveit
-Requires: moveit_ros_planning moveit_core stomp_core cmake_modules pluginlib roscpp

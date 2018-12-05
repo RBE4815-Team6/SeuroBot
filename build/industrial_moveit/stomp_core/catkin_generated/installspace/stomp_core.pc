@@ -1,8 +1,0 @@
-prefix=/home/avrs/seurobot_ws/install
-
-Name: stomp_core
-Description: Description of stomp_core
-Version: 0.1.1
-Cflags: -I/home/avrs/seurobot_ws/install/include -I/usr/include/eigen3
-Libs: -L/home/avrs/seurobot_ws/install/lib -lstomp_core
-Requires: roscpp cmake_modules

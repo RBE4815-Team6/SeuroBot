@@ -1,8 +1,0 @@
-prefix=/home/avrs/seurobot_ws/install
-
-Name: motion_msgs
-Description: Description of motion_msgs
-Version: 0.0.0
-Cflags: -I/home/avrs/seurobot_ws/install/include
-Libs: -L/home/avrs/seurobot_ws/install/lib 
-Requires: actionlib_msgs message_runtime
