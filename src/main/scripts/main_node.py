@@ -25,7 +25,13 @@ def main_node():
     # Creates a goal to send to the action server.
     goal = motion_msgs.msg.MoveRobotGoal()
     # print("\n".join(dir(goal.action_goal.goal)))
-    # goal.action_goal.goal.yaw = 1
+    goal.x=1
+    goal.y=1
+    goal.z=1
+    goal.roll=0
+    goal.pitch=0
+    goal.yaw=0
+    goal.frame="red"
 
     # Sends the goal to the action server.
     client.send_goal(goal)
@@ -46,7 +52,8 @@ if __name__ == '__main__':
         result = main_node()
 
         if result is not None:
-            print("Result:", ', '.join([str(n) for n in result.sequence]))
+            #print("Result:", ', '.join([str(n) for n in result.sequence]))
+            print("Server returned someting...")
         else:
             print("Server returned none")
     except rospy.ROSInterruptException:

@@ -69,73 +69,74 @@ class MoveRobotAction
 
 
       ROS_INFO("%s: ExcutingCB: X:%d Y:%d Z:%d ",action_name_.c_str(),goal->x,goal->y,goal->z);
+std::string group="manipulator";
+    //create quaternion
+    tf::Quaternion q_rot;
+    tf::TransformListener listener;
 
-      //create quaternion
-      tf::Quaternion q_rot;
-      tf::TransformListener listener;
+    float roll, pitch, yaw, x, y, z;
+    //pull all the values from goal
+    roll=goal->roll;//TODO
+    pitch=goal->pitch;
+    yaw=goal->yaw;
+    x=goal->x;
+    y=goal->y;
+    z=goal->z;
+    group=goal->frame;
+    //convert deg to rad
+    roll=roll*(M_PI/180);
+    pitch=pitch*(M_PI/180);
+    yaw=yaw*(M_PI/180);
 
-      float roll, pitch, yaw, x, y, z;
-      //pull all the values from goal
-      roll=goal->roll;//TODO
-      pitch=goal->pitch;
-      yaw=goal->yaw;
-      x=goal->x;
-      y=goal->y;
-      z=goal->z;
-      //convert deg to rad
-      roll=roll*(M_PI/180);
-      pitch=pitch*(M_PI/180);
-      yaw=yaw*(M_PI/180);
+    //create and fill pose	
+    q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);//roll(x), pitch(y), yaw(z),
+    geometry_msgs::Pose poseEOAT;
+    quaternionTFToMsg(q_rot,poseEOAT.orientation);
+    poseEOAT.position.x= x;
+    poseEOAT.position.y= y;
+    poseEOAT.position.z= z;
+    //setup move_group and run 
+    std::string base_frame = "/base_link";
 
-      //create and fill pose	
-      q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);//roll(x), pitch(y), yaw(z),
-      geometry_msgs::Pose poseEOAT;
-      quaternionTFToMsg(q_rot,poseEOAT.orientation);
-      poseEOAT.position.x= x;
-      poseEOAT.position.y= y;
-      poseEOAT.position.z= z;
-      //setup move_group and run 
-      std::string base_frame = "/base_link";
+    geometry_msgs::Pose move_target = poseEOAT;
+    moveit::planning_interface::MoveGroupInterface move_group(group);
+    // Plan for robot to move to part
+    move_group.setPoseReferenceFrame(base_frame);
+    move_group.setPoseTarget(move_target);
 
-      geometry_msgs::Pose move_target = poseEOAT;
-      moveit::planning_interface::MoveGroupInterface move_group("manipulator");
-      // Plan for robot to move to part
-      move_group.setPoseReferenceFrame(base_frame);
-      move_group.setPoseTarget(move_target);
-
-      moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-int status;
-      move_group.move();
-      //status=MoveItErrorCode(move_group.asyncExecute(my_plan));
-      //ROS_INFO(status);
-      // start executing the action
-      /*
-      //____EX looped exicution with preemption
-      for(int i=1; i<=goal->order; i++)
-      {
-      // check that preempt has not been requested by the client
-      if (as_.isPreemptRequested() || !ros::ok())
-      {
-      ROS_INFO("%s: Preempted", action_name_.c_str());
-      // set the action state to preempted
-      as_.setPreempted();
-      success = false;
-      break;
-      }
-      feedback_.sequence.push_back(feedback_.sequence[i] + feedback_.sequence[i-1]);
-      // publish the feedback
-      as_.publishFeedback(feedback_);
-      // this sleep is not necessary, the sequence is computed at 1 Hz for demonstration purposes
-      r.sleep();
-      }
-       */
-      if(success)
-      {
-	result_.location = feedback_.location;
-	ROS_INFO("%s: Succeeded", action_name_.c_str());
-	// set the action state to succeeded
-	as_.setSucceeded(result_);
-      }
+    moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+    int status;
+    move_group.move();
+    //status=MoveItErrorCode(move_group.asyncExecute(my_plan));
+    //ROS_INFO(status);
+    // start executing the action
+    /*
+    //____EX looped exicution with preemption
+    for(int i=1; i<=goal->order; i++)
+    {
+    // check that preempt has not been requested by the client
+    if (as_.isPreemptRequested() || !ros::ok())
+    {
+    ROS_INFO("%s: Preempted", action_name_.c_str());
+    // set the action state to preempted
+    as_.setPreempted();
+    success = false;
+    break;
+    }
+    feedback_.sequence.push_back(feedback_.sequence[i] + feedback_.sequence[i-1]);
+    // publish the feedback
+    as_.publishFeedback(feedback_);
+    // this sleep is not necessary, the sequence is computed at 1 Hz for demonstration purposes
+    r.sleep();
+    }
+     */
+    if(success)
+    {
+      result_.location = feedback_.location;
+      ROS_INFO("%s: Succeeded", action_name_.c_str());
+      // set the action state to succeeded
+      as_.setSucceeded(result_);
+    }
     }
 
 
@@ -149,7 +150,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "motion");
 
   MoveRobotAction motion("motion");
-    ros::spin();
+  ros::spin();
   //ros::waitForShutdown();
 
   return 0;
