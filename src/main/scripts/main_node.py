@@ -25,11 +25,11 @@ def main_node():
     # Creates a goal to send to the action server.
     goal = motion_msgs.msg.MoveRobotGoal()
     # print("\n".join(dir(goal.action_goal.goal)))
-    goal.x=1
-    goal.y=1
+    goal.x=.75
+    goal.y=.75
     goal.z=1
     goal.roll=0
-    goal.pitch=0
+    goal.pitch=180
     goal.yaw=0
     goal.frame="red"
 
