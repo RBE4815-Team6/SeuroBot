@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(main)
+project(motion_planning_client)
 
 find_package(catkin REQUIRED 
 COMPONENTS roscpp actionlib actionlib_msgs motion_msgs

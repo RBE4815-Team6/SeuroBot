@@ -10,6 +10,6 @@
 	remote = origin
 	merge = refs/heads/master
 [user]
-	email = mattfortmeyer@gmail.com
-	name = mattfortmeyer
+	email = hbzico1@gmail.com
+	name = JellyfishKid
 [credential]

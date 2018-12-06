@@ -16,7 +16,7 @@ tput setaf 1
 cat ~/AVRS_ws/.git/config
 echo Above is the current git user config
 tput setaf 2
-read -p "Enter a number 0-3 (0 -> Niko -+- 1 -> Ryan -+- 2 -> Remz -+- 3 -> Matt): " input
+read -p "Enter a number 0-3 (0 -> Niko -+- 1 -> Ryan -+- 2 -> Remz -+- 3 -> hannah): " input
 
 tput setaf 7 
 case $input in
@@ -38,7 +38,7 @@ case $input in
 	3) 
 	echo \ 
 	echo setting user...
-	sudo cp -f mattfortmeyer.txt ~/seurobot_ws/.git/config
+	sudo cp -f hannah.txt ~/seurobot_ws/.git/config
 	;;
 	
 	*)echo error
