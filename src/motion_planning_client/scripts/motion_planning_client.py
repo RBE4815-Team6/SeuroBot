@@ -14,6 +14,8 @@ from motion_msgs.msg import MoveRobotAction
 
 
 def main_node():
+
+
     # SimpleActionClient construction, targeting the fibonacci topic of type Fibonacci
     client = actionlib.SimpleActionClient('motion',
                                           motion_msgs.msg.MoveRobotAction)
@@ -22,14 +24,21 @@ def main_node():
     # listening for goals. (So the goals aren't ignored.)
     client.wait_for_server()
 
+
+
+    boardx=rospy.get_param('workcell/canvas_x')
+    boardy=rospy.get_param('workcell/canvas_y')
+    boardz=rospy.get_param('workcell/canvas_z')
+    print(boardx)
+
     # Creates a goal to send to the action server.
     goal = motion_msgs.msg.MoveRobotGoal()
     # print("\n".join(dir(goal.action_goal.goal)))
-    goal.x=.75
-    goal.y=.75
+    goal.x=1
+    goal.y=0
     goal.z=1
     goal.roll=0
-    goal.pitch=180
+    goal.pitch=0
     goal.yaw=0
     goal.frame="red"
 
