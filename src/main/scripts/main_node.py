@@ -23,8 +23,9 @@ def main_node():
     client.wait_for_server()
 
     # Creates a goal to send to the action server.
-    goal = motion_msgs.msg.MoveRobotAction()
-    # goal.yaw = 1
+    goal = motion_msgs.msg.MoveRobotGoal()
+    # print("\n".join(dir(goal.action_goal.goal)))
+    # goal.action_goal.goal.yaw = 1
 
     # Sends the goal to the action server.
     client.send_goal(goal)
@@ -44,6 +45,9 @@ if __name__ == '__main__':
         rospy.init_node('main_node_py')
         result = main_node()
 
-        print("Result:", ', '.join([str(n) for n in result.sequence]))
+        if result is not None:
+            print("Result:", ', '.join([str(n) for n in result.sequence]))
+        else:
+            print("Server returned none")
     except rospy.ROSInterruptException:
         print("program interrupted before completion", file=sys.stderr)

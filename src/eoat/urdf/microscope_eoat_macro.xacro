@@ -6,20 +6,20 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://urdf/meshes/eoat/visual/microscope.stl"/>
+        <mesh filename="package://eoat/meshes/visual/microscope.stl"/>
       </geometry>
       <material name="abb_orange">
         <color rgba="1 0.43 0 1"/>
       </material>
     </visual>
-    <!--collision>
+    <collision>
       <geometry>
-        <mesh filename="package://abb_irb1600_support/meshes/eoat/collision/microscope.stl"/>
+        <mesh filename="package://eoat/meshes/collision/microscope.stl"/>
       </geometry>
       <material name="yellow">
         <color rgba="0 1 1 1"/>
       </material>
-    </collision-->
+    </collision>
   </link>
   </xacro:macro>
 </robot>
