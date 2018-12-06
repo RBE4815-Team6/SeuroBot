@@ -6,6 +6,8 @@
 #To run the script type "sudo ./setGitUser.sh"
 #If you have trouble with this make sure the file properties/permissions allow it to be excutable. 
 
+#TODO add easy ws setting
+
 #location of ipconfig file
 file='/etc/network/interfaces'
 
@@ -21,22 +23,22 @@ case $input in
 	0) 
 	echo \ 
 	echo setting user...
-	sudo cp -f niko1499.txt ~/AVRS_ws/.git/config
+	sudo cp -f niko1499.txt ~/seurobot_ws/.git/config
 	;;
 	1) 
 	echo \ 
 	echo setting user...
-	sudo cp -f Ryano647.txt ~/AVRS_ws/.git/config
+	sudo cp -f Ryano647.txt ~/seurobot_ws/.git/config
 	;;
 	2) 
 	echo \ 
 	echo setting user...
-	sudo cp -f jremz8902.txt ~/AVRS_ws/.git/config
+	sudo cp -f jremz8902.txt ~/seurobot_ws/.git/config
 	;;
 	3) 
 	echo \ 
 	echo setting user...
-	sudo cp -f mattfortmeyer.txt ~/AVRS_ws/.git/config
+	sudo cp -f mattfortmeyer.txt ~/seurobot_ws/.git/config
 	;;
 	
 	*)echo error
@@ -49,7 +51,7 @@ echo \
 
 echo The git user config is now: 
 tput sgr0
-cat ~/AVRS_ws/.git/config
+cat ~/seurobot_ws/.git/config
 tput setaf 2
 
 
