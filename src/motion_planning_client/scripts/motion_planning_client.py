@@ -37,7 +37,7 @@ def main_node():
     #goal.x=-.5
     #goal.y=-.6
     goal.x=.1
-    goal.y=-.8
+    goal.y=.8
     goal.z=-.0
     goal.roll=0
     goal.pitch=180
@@ -46,6 +46,8 @@ def main_node():
 
     # Sends the goal to the action server.
     client.send_goal(goal)
+
+    #client.cancel_all_goals()
 
     # Waits for the server to finish performing the action.
     client.wait_for_result()

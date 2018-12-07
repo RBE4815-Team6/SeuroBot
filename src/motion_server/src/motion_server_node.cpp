@@ -56,7 +56,6 @@ class MoveRobotAction
       ros::Rate r(1);
       bool success = true;
 
-      // push_back the seeds for the motion sequence
 
       //FEEDBACK NEEDS UPDATE
       /*    
@@ -64,87 +63,85 @@ class MoveRobotAction
 	    feedback_.sequence.push_back(0);
 	    feedback_.sequence.push_back(1);
        */
-      // publish info to the console for the user
-      //    ROS_INFO("%s: Executing, creating motion sequence of order %i with seeds %i, %i", action_name_.c_str(), goal->order, feedback_.sequence[0], feedback_.sequence[1]);
 
-//fix conversion in pring TODO
       ROS_INFO("%s: ExcutingCB: X:%f Y:%f Z:%f ",action_name_.c_str(),goal->x,goal->y,goal->z);
-std::string group="manipulator";
-    //create quaternion
-    tf::Quaternion q_rot;
-    tf::TransformListener listener;
+      std::string group="manipulator";
+      //create quaternion
+      tf::Quaternion q_rot;
+      tf::TransformListener listener;
 
-    float roll, pitch, yaw, x, y, z;
-    //pull all the values from goal
-    roll=goal->roll;//TODO
-    pitch=goal->pitch;
-    yaw=goal->yaw;
-    x=goal->x;
-    y=goal->y;
-    z=goal->z;
-    group=goal->frame;
-    //convert deg to rad
-    roll=roll*(M_PI/180);
-    pitch=pitch*(M_PI/180);
-    yaw=yaw*(M_PI/180);
+      float roll, pitch, yaw, x, y, z;
+      //pull all the values from goal
+      roll=goal->roll;
+      pitch=goal->pitch;
+      yaw=goal->yaw;
+      x=goal->x;
+      y=goal->y;
+      z=goal->z;
+      group=goal->frame;
+      //convert deg to rad
+      roll=roll*(M_PI/180);
+      pitch=pitch*(M_PI/180);
+      yaw=yaw*(M_PI/180);
 
-    //create and fill pose	
-    q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);//roll(x), pitch(y), yaw(z),
-    geometry_msgs::Pose poseEOAT;
-    quaternionTFToMsg(q_rot,poseEOAT.orientation);
-    poseEOAT.position.x= x;
-    poseEOAT.position.y= y;
-    poseEOAT.position.z= z;
-    //setup move_group and run 
-    std::string base_frame = "/base_link";
+      //create and fill pose	
+      q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);//roll(x), pitch(y), yaw(z),
+      geometry_msgs::Pose poseEOAT;
+      quaternionTFToMsg(q_rot,poseEOAT.orientation);
+      poseEOAT.position.x= x;
+      poseEOAT.position.y= y;
+      poseEOAT.position.z= z;
+      //setup move_group and run 
+      std::string base_frame = "/base_link";
 
-    geometry_msgs::Pose move_target = poseEOAT;
-    moveit::planning_interface::MoveGroupInterface move_group(group);
-    // Plan for robot to move to part
-    move_group.setPoseReferenceFrame(base_frame);
-    move_group.setPoseTarget(move_target);
+      geometry_msgs::Pose move_target = poseEOAT;
+      moveit::planning_interface::MoveGroupInterface move_group(group);
+      // Plan for robot to move to part
+      move_group.setPoseReferenceFrame(base_frame);
+      move_group.setPoseTarget(move_target);
 
-    moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-    int status;
-    move_group.move();
-    //status=MoveItErrorCode(move_group.asyncExecute(my_plan));
-    //ROS_INFO(status);
-    // start executing the action
-    /*
-    //____EX looped exicution with preemption
-    for(int i=1; i<=goal->order; i++)
-    {
-    // check that preempt has not been requested by the client
-    if (as_.isPreemptRequested() || !ros::ok())
-    {
-    ROS_INFO("%s: Preempted", action_name_.c_str());
-    // set the action state to preempted
-    as_.setPreempted();
-    success = false;
-    break;
+      moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+      int status;
+      move_group.move();
+
+      success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+      //____EX looped exicution with preemption
+      // check that preempt has not been requested by the client
+      if (as_.isPreemptRequested() || !ros::ok())
+      {
+	ROS_INFO("%s: Preempted", action_name_.c_str());
+	// set the action state to preempted
+	as_.setPreempted();
+	success = false;
+      move_group.stop();
+	}
+      // publish the feedback
+      //as_.publishFeedback(feedback_);
+
+      //check success 
+      if(success)
+      {
+	result_.statusCode =0;
+	ROS_INFO("%s: Succeeded", action_name_.c_str());
+	// set the action state to succeeded
+	as_.setSucceeded(result_);
+      }else{
+	result_.statusCode=1;
+	ROS_INFO("%s: Failure",action_name_.c_str());
+	as_.setAborted(result_);
+      }
+
     }
-    feedback_.sequence.push_back(feedback_.sequence[i] + feedback_.sequence[i-1]);
-    // publish the feedback
-    as_.publishFeedback(feedback_);
-    // this sleep is not necessary, the sequence is computed at 1 Hz for demonstration purposes
-    r.sleep();
-    }
-     */
-    if(success)
-    {
-      result_.location = feedback_.location;
-      ROS_INFO("%s: Succeeded", action_name_.c_str());
-      // set the action state to succeeded
-      as_.setSucceeded(result_);
-    }
-    }
-
 
 };
 
 
 int main(int argc, char** argv)
 {
+  bool start=true;
+  if(start)
+    ROS_INFO("Server Running...");
+  start=false;
   //ros::AsyncSpinner async_spinner(1);
   //async_spinner.start();
   ros::init(argc, argv, "motion");

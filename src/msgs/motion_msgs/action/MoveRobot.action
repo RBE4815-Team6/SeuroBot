@@ -8,7 +8,7 @@ float32 yaw
 string frame
 ---
 #result definition
-geometry_msgs/PoseStamped location
+int32 statusCode
 ---
 #feedback
 geometry_msgs/PoseStamped location
