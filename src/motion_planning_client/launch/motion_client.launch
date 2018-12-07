@@ -4,6 +4,6 @@
     <rosparam command="load" file="$(find motion_planning_client)/launch/settings.yaml" />
   </group>
 
-  <node pkg="motion_planning_client" type="motion_planning_client.py" name="motion_client_node">
+  <node pkg="motion_planning_client" type="motion_planning_client.py" name="motion_client_node" output="screen">
   </node>
 </launch>

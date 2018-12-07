@@ -68,7 +68,7 @@ class MoveRobotAction
       //    ROS_INFO("%s: Executing, creating motion sequence of order %i with seeds %i, %i", action_name_.c_str(), goal->order, feedback_.sequence[0], feedback_.sequence[1]);
 
 //fix conversion in pring TODO
-      ROS_INFO("%s: ExcutingCB: X:%d Y:%d Z:%d ",action_name_.c_str(),goal->x,goal->y,goal->z);
+      ROS_INFO("%s: ExcutingCB: X:%f Y:%f Z:%f ",action_name_.c_str(),goal->x,goal->y,goal->z);
 std::string group="manipulator";
     //create quaternion
     tf::Quaternion q_rot;
