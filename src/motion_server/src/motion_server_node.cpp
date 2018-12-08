@@ -18,6 +18,7 @@
 #include <moveit_msgs/DisplayTrajectory.h>
 #include <moveit_msgs/AttachedCollisionObject.h>
 #include <moveit_msgs/CollisionObject.h>
+#include <moveit_msgs/GetCartesianPath.h>
 //#include <moveit/planning_interface/move_group.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 
@@ -97,14 +98,47 @@ class MoveRobotAction
       geometry_msgs::Pose move_target = poseEOAT;
       moveit::planning_interface::MoveGroupInterface move_group(group);
       // Plan for robot to move to part
-      move_group.setPoseReferenceFrame(base_frame);
-      move_group.setPoseTarget(move_target);
 
-      moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-      int status;
-      move_group.move();
+	moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+      if(0){
+	move_group.setPoseReferenceFrame(base_frame);
+	move_group.setPoseTarget(move_target);
 
-      success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+	int status;
+	move_group.move();
+	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+      }else{
+
+	std::vector< geometry_msgs::Pose > poses;
+
+	moveit_msgs::RobotTrajectory trajectory;
+
+	//moveit_msgs::GetCartesianPath srv;
+	//srv.request.wait_for_execution = true;
+
+	//ros::ServiceClient executeKnownTrajectoryServiceClient = nh_.serviceClient<moveit_msgs::GetCartesianPathExecuteKnownTrajectory>("/execute_kinematic_path");
+
+	poses.push_back(poseEOAT);
+
+
+	double status=	move_group.computeCartesianPath(poses, 0.005, .1, trajectory, true);
+
+	//success=move_group.execute(trajectory);
+	move_group.move();
+	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+
+      }
+      /*
+	 if (status>0.0){
+	 success=true;
+	 }else {
+
+	 success=false;
+	 }
+       */
+
+
+
       //____EX looped exicution with preemption
       // check that preempt has not been requested by the client
       if (as_.isPreemptRequested() || !ros::ok())
@@ -113,8 +147,8 @@ class MoveRobotAction
 	// set the action state to preempted
 	as_.setPreempted();
 	success = false;
-      move_group.stop();
-	}
+	move_group.stop();
+      }
       // publish the feedback
       //as_.publishFeedback(feedback_);
 

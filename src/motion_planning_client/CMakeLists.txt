@@ -11,6 +11,7 @@ COMPONENTS roscpp actionlib actionlib_msgs motion_msgs
   actionlib_msgs
   geometry_msgs
   tf
+  force_msgs
 )
 
 find_package(Boost REQUIRED COMPONENTS system)
@@ -31,6 +32,7 @@ catkin_package(
     rospy
     message_runtime
     motion_msgs	
+    force_msgs
 )
 add_dependencies(${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
