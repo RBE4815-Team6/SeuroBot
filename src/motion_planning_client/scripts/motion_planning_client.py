@@ -38,7 +38,7 @@ def main_node():
     #goal.y=-.6
     goal.x=.1
     goal.y=.8
-    goal.z=-.0
+    goal.z=-999
     goal.roll=0
     goal.pitch=180
     goal.yaw=0
