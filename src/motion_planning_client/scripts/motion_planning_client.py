@@ -19,6 +19,10 @@ class Robot:
                                               motion_msgs.msg.MoveRobotAction)
 
         self.force_sub=rospy.Subscriber('/force_data',LoadCellForces32,self.forceCB)
+        #self.Zz
+        #self.Az
+        #self.Bz
+        #self.Cz
 
     def forceCB(self,data):#function to prcess force data 
         print("forcecb working")
@@ -26,9 +30,15 @@ class Robot:
         abortThresh =.5
         #print (data)
 
-        print(data.cellA)
+        if(data.cellA>zeroThresh or data.cellB>zeroThresh or data.cellC>zeroThresh):
+
+            print(data.cellA)
+
+
         if(data.cellA>abortThresh or data.cellB>abortThresh or data.cellC>abortThresh):
-            print("too much force")
+            ROS_WARN("Too much force!")
+            self.client.cancel_all_goals()
+
 
 
 
@@ -62,7 +72,11 @@ def main_node():
         # x=-.5 y=-.6
         #              x,  y,  z,  r,  p,  y,  tool
         #z rotation off by 180 -28?
-        result = myRobot.move(.3, -.9, .6, 0, 180, 0, "tool_red")
+
+        #z .025 red
+        #z .0225 blue
+
+        result = myRobot.move(.4, -.7, .04, 0, 180, 0, "tool_green")
         print(result)
 
     except rospy.ROSInterruptException:
