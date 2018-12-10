@@ -18,8 +18,18 @@ class Robot:
         self.client = actionlib.SimpleActionClient('motion',
                                               motion_msgs.msg.MoveRobotAction)
 
-    def forceCB(self,data):
+        self.force_sub=rospy.Subscriber('/force_data',LoadCellForces32,self.forceCB)
+
+    def forceCB(self,data):#function to prcess force data 
         print("forcecb working")
+        zeroThresh = .5 #.5 is half way point for force
+        abortThresh =.5
+        #print (data)
+
+        print(data.cellA)
+        if(data.cellA>abortThresh or data.cellB>abortThresh or data.cellC>abortThresh):
+            print("too much force")
+
 
 
     def move(self,x, y, z, roll, pitch, yaw, tool):
@@ -51,7 +61,8 @@ def main_node():
         # publish and subscribe over ROS.
         # x=-.5 y=-.6
         #              x,  y,  z,  r,  p,  y,  tool
-        result = myRobot.move(-.1, -.8, 0, 0, 180, 0, "tool_red")
+        #z rotation off by 180 -28?
+        result = myRobot.move(.3, -.9, .6, 0, 180, 0, "tool_red")
         print(result)
 
     except rospy.ROSInterruptException:

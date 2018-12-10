@@ -27,6 +27,12 @@
 //general
 #include <math.h>
 
+
+#include <moveit_msgs/DisplayTrajectory.h>
+#include <moveit_msgs/DisplayRobotState.h>
+#include <moveit/planning_scene_interface/planning_scene_interface.h>
+
+
 class MoveRobotAction
 {
   protected:
@@ -100,18 +106,31 @@ class MoveRobotAction
       // Plan for robot to move to part
 
 	moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-      if(0){
+
+
+
+//ros::Publisher display_publisher = nh_.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
+  //moveit_msgs::DisplayTrajectory display_trajectory;
+
+
+	int mode=2;
+
+int visualize=0;
+
+	moveit_msgs::RobotTrajectory trajectory;
+
 	move_group.setPoseReferenceFrame(base_frame);
+
+      if(mode==1){
 	move_group.setPoseTarget(move_target);
 
 	int status;
 	move_group.move();
 	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
-      }else{
+      }else if(mode==2){
 
 	std::vector< geometry_msgs::Pose > poses;
 
-	moveit_msgs::RobotTrajectory trajectory;
 
 	//moveit_msgs::GetCartesianPath srv;
 	//srv.request.wait_for_execution = true;
@@ -120,14 +139,25 @@ class MoveRobotAction
 
 	poses.push_back(poseEOAT);
 
+	double status=	move_group.computeCartesianPath(poses, 0.005, 0.0, trajectory, true);
 
-	double status=	move_group.computeCartesianPath(poses, 0.005, .1, trajectory, true);
 
-	//success=move_group.execute(trajectory);
-	move_group.move();
+my_plan.trajectory_=trajectory;
+
+	move_group.execute(my_plan);
+//	move_group.move();
 	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
       }
+
+if(visualize=1){
+    //display_publisher.publish(trajectory);
+
+}
+
+
+
+
       /*
 	 if (status>0.0){
 	 success=true;
