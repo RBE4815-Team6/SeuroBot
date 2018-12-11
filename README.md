@@ -22,8 +22,11 @@ This node recives action messages from the action client and sends motion reques
 ```
 roslaunch motion_server motion_server.launch 
 ```
+============
+motion_planning_client
 ```
-roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch sim:=false robot_ip:=192.168.100.100
+roslaunch motion_planning_client motion_client.launch 
+
 ```
 ```
 roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch sim:=false robot_ip:=192.168.100.100

@@ -185,12 +185,12 @@ if(visualize=1){
       //check success 
       if(success)
       {
-	result_.statusCode =0;
+	result_.statusCode =1;
 	ROS_INFO("%s: Succeeded", action_name_.c_str());
 	// set the action state to succeeded
 	as_.setSucceeded(result_);
-      }else{
-	result_.statusCode=1;
+      }else{//failure
+	result_.statusCode=0;
 	ROS_INFO("%s: Failure",action_name_.c_str());
 	as_.setAborted(result_);
       }
