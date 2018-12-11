@@ -4,10 +4,22 @@
 
 
 
-## Launch files
+## ROS nodes and their launch files
 
 
-Launch master launcher:
+- Launch master launcher:
+Launches everything. Use with caution
+
+```
+roslaunch seurobot master.launch
+```
+
+- Launch master launcher:
+Launches muscle but not brain
+
+```
+roslaunch seurobot blaster.launch
+```
 
 - ROS-I
 Launch the ROS-I stack to connect to the robot and visualize in rviz:
@@ -28,6 +40,14 @@ This node is the main controll node written in python.  When in normal operation
 
 ```
 roslaunch motion_planning_client motion_client.launch 
+
+```
+
+- serialcoms0
+Creates serial connection with Arduino board. Used for forces sensing. Allows for publishing and subscribing of ROS topics with Arduino.
+
+```
+roslaunch seurobot serialcoms0.launch 
 
 ```
 
