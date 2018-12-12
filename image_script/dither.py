@@ -195,7 +195,7 @@ STUCKI = Kernel([Kernel.DistributionPoint(p, x) for p, x in [
 
 def main():
     # Load the image
-    img = Image.open("seurat1.jpg")
+    img = Image.open("cbputnam100.jpg")
     img = img.convert('RGB')
     fast_img = FastImage(img)
 
@@ -210,17 +210,19 @@ def main():
     MAGENTA = Color(255.0, comp, 255.0)
     YELLOW = Color(255.0, 255.0, comp)
     BROWN = Color(165.0, 42.0, 42.0)
+    LIGHTBROWN = Color(180.0, 101.0, 29.0)
 
     colors = [
         WHITE,
-        #BLACK,
+        BLACK,
         RED,
         BLUE,
-        GREEN,
-        #CYAN,
+        #GREEN,
+        CYAN,
         #MAGENTA,
         #YELLOW,
-        #BROWN
+        BROWN,
+        LIGHTBROWN
     ]
 
     """

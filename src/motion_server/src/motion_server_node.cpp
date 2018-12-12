@@ -105,21 +105,21 @@ class MoveRobotAction
       moveit::planning_interface::MoveGroupInterface move_group(group);
       // Plan for robot to move to part
 
-	moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+      moveit::planning_interface::MoveGroupInterface::Plan my_plan;
 
 
 
-//ros::Publisher display_publisher = nh_.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
-  //moveit_msgs::DisplayTrajectory display_trajectory;
+      //ros::Publisher display_publisher = nh_.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
+      //moveit_msgs::DisplayTrajectory display_trajectory;
 
 
-	int mode=2;
+      int mode=2;
 
-int visualize=0;
+      int visualize=0;
+double status;
+      moveit_msgs::RobotTrajectory trajectory;
 
-	moveit_msgs::RobotTrajectory trajectory;
-
-	move_group.setPoseReferenceFrame(base_frame);
+      move_group.setPoseReferenceFrame(base_frame);
 
       if(mode==1){
 	move_group.setPoseTarget(move_target);
@@ -139,21 +139,23 @@ int visualize=0;
 
 	poses.push_back(poseEOAT);
 
-	double status=	move_group.computeCartesianPath(poses, 0.005, 0.0, trajectory, true);
+	status=	move_group.computeCartesianPath(poses, 0.005, 0.0, trajectory, true);
 
 
-my_plan.trajectory_=trajectory;
+	my_plan.trajectory_=trajectory;
 
 	move_group.execute(my_plan);
-//	move_group.move();
+	//	move_group.move();
 	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
       }
 
-if(visualize=1){
-    //display_publisher.publish(trajectory);
+      feedback_.current=status;
 
-}
+      if(visualize=1){
+	//display_publisher.publish(trajectory);
+
+      }
 
 
 
@@ -180,7 +182,7 @@ if(visualize=1){
 	move_group.stop();
       }
       // publish the feedback
-      //as_.publishFeedback(feedback_);
+      as_.publishFeedback(feedback_);
 
       //check success 
       if(success)
