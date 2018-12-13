@@ -44,6 +44,10 @@ roslaunch seurobot serialcoms0.launch
 
 ```
 
+## Dithering Script
+
+The dithering script located in the image_script directory can be used to turn any image into a dithered image with user defined number of colors
+
 
 ## Depends On 
 - pillow
