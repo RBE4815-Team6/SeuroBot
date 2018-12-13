@@ -195,11 +195,11 @@ STUCKI = Kernel([Kernel.DistributionPoint(p, x) for p, x in [
 
 def main():
     # Load the image
-    img = Image.open("cbputnam100.jpg")
+    img = Image.open("BMOSmall.png")
     img = img.convert('RGB')
     fast_img = FastImage(img)
 
-    comp = 0.0
+    comp = 40.0
 
     WHITE = Color(255.0, 255.0, 255.0)
     BLACK = Color(0.0, 0.0, 0.0)
@@ -211,18 +211,22 @@ def main():
     YELLOW = Color(255.0, 255.0, comp)
     BROWN = Color(165.0, 42.0, 42.0)
     LIGHTBROWN = Color(180.0, 101.0, 29.0)
+    ORANGE = Color(255.0,165.0,0.0)
+    PINK = Color(255.0,24.0,148.0)
 
     colors = [
         WHITE,
         BLACK,
         RED,
         BLUE,
-        #GREEN,
+        GREEN,
         CYAN,
         #MAGENTA,
         #YELLOW,
-        BROWN,
-        LIGHTBROWN
+        #BROWN,
+        #LIGHTBROWN,
+        #ORANGE,
+        #PINK
     ]
 
     """

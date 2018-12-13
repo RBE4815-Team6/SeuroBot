@@ -39,8 +39,8 @@ class Robot:
 
     offsetXR = 0
     offsetYR = 0
-    offsetXG = .003
-    offsetYG = .001
+    offsetXG = .002
+    offsetYG = .002
     offsetXB = -.0005
     offsetYB = .002
 
@@ -190,11 +190,11 @@ def main_node():
 
     if (debug == False):
         print("debug is false")
-        xOrigin = -.6  # rospy.get_param('workcell/canvas_x')
-        yOrigin = -1.  # rospy.get_param('workcell/canvas_y')
+        xOrigin = -.8  # rospy.get_param('workcell/canvas_x')
+        yOrigin = -.7  # rospy.get_param('workcell/canvas_y')
         boardz = rospy.get_param('workcell/canvas_z')
 
-        scalingFactor = .0035  # 1=Meter .01=cm
+        scalingFactor = .004  # 1=Meter .01=cm
 
         painter = Robot()
         seperation = .01
@@ -203,7 +203,7 @@ def main_node():
         currentTool = "tool_red"
 
         scriptDir = os.path.dirname(__file__)
-        fileName="SPIRALS.png"
+        fileName="cbputnam100R.png"
         impath = os.path.join(scriptDir, '../../../../seurobot_ws/image_script/')
         print("reading image")
         img = Image.open(impath+fileName)
@@ -413,7 +413,11 @@ def main_node():
             #.02 red
 
             # x-.5 y-1
-            result = myRobot.move(-.6, -1.0 , .04, 0, 180, 0, "tool_red")
+
+            #GOT TO 65 57
+
+            
+            result = myRobot.move(-.8, -.7, .05, 0, 180, 0, "tool_red")
 
 
             print(result)
