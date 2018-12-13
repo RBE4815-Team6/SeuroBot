@@ -22,7 +22,7 @@
 //#include <moveit/planning_interface/move_group.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 
-#include <motion_msgs/MoveRobotAction.h>
+#include <motion_msgs/MoveRobotFastAction.h>
 
 //general
 #include <math.h>
@@ -33,31 +33,31 @@
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 
 
-class MoveRobotAction
+class MoveRobotFastAction
 {
   protected:
 
     ros::NodeHandle nh_;
-    actionlib::SimpleActionServer<motion_msgs::MoveRobotAction> as_; // NodeHandle instance must be created before this line. Otherwise strange error occurs.
+    actionlib::SimpleActionServer<motion_msgs::MoveRobotFastAction> as_; // NodeHandle instance must be created before this line. Otherwise strange error occurs.
     std::string action_name_;
     // create messages that are used to published feedback/result
-    motion_msgs::MoveRobotFeedback feedback_;
-    motion_msgs::MoveRobotResult result_;
+    motion_msgs::MoveRobotFastFeedback feedback_;
+    motion_msgs::MoveRobotFastResult result_;
 
   public:
 
-    MoveRobotAction(std::string name) :
-      as_(nh_, name, boost::bind(&MoveRobotAction::executeCB, this, _1), false),
+    MoveRobotFastAction(std::string name) :
+      as_(nh_, name, boost::bind(&MoveRobotFastAction::executeCB, this, _1), false),
       action_name_(name)
   {
     as_.start();
   }
 
-    ~MoveRobotAction(void)
+    ~MoveRobotFastAction(void)
     {
     }
 
-    void executeCB(const motion_msgs::MoveRobotGoalConstPtr &goal)
+    void executeCB(const motion_msgs::MoveRobotFastGoalConstPtr &goal)
     {
       // helper variables
       ros::Rate r(1);
@@ -114,7 +114,39 @@ class MoveRobotAction
 
 
 //TEST ZONE
-      int mode=3;
+
+geometry_msgs::Pose poseA;
+geometry_msgs::Pose poseB;
+geometry_msgs::Pose poseC;
+geometry_msgs::Pose poseD;
+
+
+      quaternionTFToMsg(q_rot,poseA.orientation);
+      quaternionTFToMsg(q_rot,poseB.orientation);
+      quaternionTFToMsg(q_rot,poseC.orientation);
+      quaternionTFToMsg(q_rot,poseD.orientation);
+
+
+
+      poseA.position.x= 0.0;
+      poseA.position.y= -1.0;
+      poseA.position.z= .3;
+  
+      poseB.position.x= 0.1;
+      poseB.position.y= -1.0;
+      poseB.position.z= .3;
+    
+      poseC.position.x= 0.1;
+      poseC.position.y= -.9;
+      poseC.position.z= .3;
+      
+      poseD.position.x= 0.0;
+      poseD.position.y= -1.0;
+      poseD.position.z= .3;
+
+
+
+      int mode=2;
 
       int visualize=0;
 double status;
@@ -139,7 +171,11 @@ double status;
 	//ros::ServiceClient executeKnownTrajectoryServiceClient = nh_.serviceClient<moveit_msgs::GetCartesianPathExecuteKnownTrajectory>("/execute_kinematic_path");
 
 
-poses.push_back(poseEOAT);
+	//poses.push_back(poseEOAT);
+	poses.push_back(poseA);
+	poses.push_back(poseB);
+	poses.push_back(poseC);
+	poses.push_back(poseD);
 
 
 
@@ -154,63 +190,7 @@ poses.push_back(poseEOAT);
 	//	move_group.move();
 	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
-      }else if (mode==3){//queue a point draw DANGER ZONE 3 point touch
-
-	std::vector< geometry_msgs::Pose > poses;
-
-
-	//moveit_msgs::GetCartesianPath srv;
-	//srv.request.wait_for_execution = true;
-
-	//ros::ServiceClient executeKnownTrajectoryServiceClient = nh_.serviceClient<moveit_msgs::GetCartesianPathExecuteKnownTrajectory>("/execute_kinematic_path");
-
-
-geometry_msgs::Pose poseClear;
-geometry_msgs::Pose poseTouch;
-
-
-quaternionTFToMsg(q_rot,poseClear.orientation);
-quaternionTFToMsg(q_rot,poseTouch.orientation);
-
-poseClear.position.x=goal->x;
-poseClear.position.y=goal->y;
-poseClear.position.z=.04;//magic
-
-poseTouch.position.x=goal->x;
-poseTouch.position.y=goal->y;
-poseTouch.position.z=.02;//magic
-
-ROS_WARN("MODE 3");
-
-
-
-poses.push_back(poseClear);
-poses.push_back(poseTouch);
-poses.push_back(poseClear);
-
-
-
-
-//poses.push_back(poseEOAT);
-
-
-
-
-
-	status=	move_group.computeCartesianPath(poses, 0.005, 0.0, trajectory, true);
-
-
-	my_plan.trajectory_=trajectory;
-
-	move_group.execute(my_plan);
-	//	move_group.move();
-	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
-
-
-
-
-
-}
+      }
 
       feedback_.current=status;
 
@@ -274,7 +254,7 @@ int main(int argc, char** argv)
   //async_spinner.start();
   ros::init(argc, argv, "motion");
 
-  MoveRobotAction motion("motion");
+  MoveRobotFastAction motion("motion");
   ros::spin();
   //ros::waitForShutdown();
 

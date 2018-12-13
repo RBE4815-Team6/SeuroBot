@@ -6,7 +6,9 @@ find_package(Boost REQUIRED COMPONENTS system)
 
 add_action_files(
   DIRECTORY action
-  FILES MoveRobot.action
+  FILES 
+  MoveRobot.action
+  MoveRobotFast.action
 )
 
 generate_messages(

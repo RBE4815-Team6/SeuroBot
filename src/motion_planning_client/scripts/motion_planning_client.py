@@ -45,6 +45,7 @@ class Robot:
     offsetYB = .002
 
 
+
     def __init__(self):
         self.client = actionlib.SimpleActionClient('motion',
                                                    motion_msgs.msg.MoveRobotAction)
@@ -111,8 +112,8 @@ class Robot:
         #if(tool=="tool_blue"):
             #tool="tool_change_blue"
 
-
-        goal = motion_msgs.msg.MoveRobotGoal(self.lastX, self.lastY, self.lastZ, self.lastRoll, self.lastPitch,
+        # Z sad
+        goal = motion_msgs.msg.MoveRobotGoal(self.lastX, self.lastY, .3, self.lastRoll, self.lastPitch,
                                              self.lastYaw, tool)
 
         # Sends the goal to the action server.
@@ -178,6 +179,31 @@ class Robot:
         self.client.wait_for_result()
         return self.client.get_result()
 
+    def drawPoint(self,x,y):
+        self.lastX=x
+        self.lastY=y
+
+        # Waits until the action server has started up and started
+        # listening for goals. (So the goals aren't ignored.)
+        self.client.wait_for_server()
+
+        # Creates a goal to send to the action server.
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, roll, pitch, yaw, tool)
+        # goal = motion_msgs.msg.MoveRobotGoal()
+        # goal.z=.4
+
+        # Sends the goal to the action server.
+        self.client.send_goal(goal)
+
+        # client.cancel_all_goals()
+        print("feedback")
+        #print(self.client.get_feedback())
+        # Waits for the server to finish performing the action.
+        self.client.wait_for_result()
+        return self.client.get_result()
+
+
+
 
 def printImage():
     print("in print image")
@@ -190,8 +216,8 @@ def main_node():
 
     if (debug == False):
         print("debug is false")
-        xOrigin = -.8  # rospy.get_param('workcell/canvas_x')
-        yOrigin = -.7  # rospy.get_param('workcell/canvas_y')
+        xOrigin = -.75  # rospy.get_param('workcell/canvas_x')
+        yOrigin = -.72  # rospy.get_param('workcell/canvas_y')
         boardz = rospy.get_param('workcell/canvas_z')
 
         scalingFactor = .004  # 1=Meter .01=cm
@@ -203,7 +229,7 @@ def main_node():
         currentTool = "tool_red"
 
         scriptDir = os.path.dirname(__file__)
-        fileName="cbputnam100R.png"
+        fileName="BMOtrace.png"
         impath = os.path.join(scriptDir, '../../../../seurobot_ws/image_script/')
         print("reading image")
         img = Image.open(impath+fileName)
@@ -217,19 +243,19 @@ def main_node():
 
         colors = [
             "WHITE",
-            # "BLACK",
+            "BLACK",
 
-            "BLUE",
-            "RED",
-            "GREEN",
-            # "CYAN",
+            #"BLUE",
+            #"RED",
+            #"GREEN",
+             "CYAN",
             # "MAGENTA",
-            # "YELLOW",
+             "YELLOW",
             # "BROWN"
         ]
         print("waiting..")
 
-        mode="eachcolor"
+        mode="eachcolorfast"
 
         if (done):
             print("STARTING RUN")
@@ -329,9 +355,9 @@ def main_node():
             elif (mode=="eachcolor"):
                 for i in range(len(colors)):
                     print("Changing tool")
-                    if(colors[i]== "RED" or colors[i]=="CYAN" or colors[i]=="BLACK"):
+                    if(colors[i]== "RED" or colors[i]=="NONE" or colors[i]=="BLACK"):
                         myRobot.changeTool("tool_red")
-                    elif(colors[i]== "GREEN" or colors[i]=="MAGENTA" or colors[i]=="BROWN"):
+                    elif(colors[i]== "GREEN" or colors[i]=="CYAN" or colors[i]=="BROWN"):
                         myRobot.changeTool("tool_green")
                     elif(colors[i]=="BLUE" or colors[i]=="YELLOW"):
                         myRobot.changeTool("tool_blue")
@@ -394,6 +420,66 @@ def main_node():
                                                 myRobot.clear()
                                 else:  # SKIP
                                     done=1
+            elif (mode=="eachcolorfast"):
+                for i in range(len(colors)):
+                    print("Changing tool")
+                    if(colors[i]== "RED" or colors[i]=="CYAN" or colors[i]=="BLACK"):
+                        myRobot.changeTool("tool_red")
+                    elif(colors[i]== "GREEN" or colors[i]=="MAGENTA" or colors[i]=="BROWN"):
+                        myRobot.changeTool("tool_green")
+                    elif(colors[i]=="BLUE" or colors[i]=="YELLOW"):
+                        myRobot.changeTool("tool_blue")
+                    print("STARTING RUN")
+
+                    for x in range(width):
+                        for y in range(height):
+                            r, g, b = img.getpixel((x, y))
+                            print("\nPrinting:")
+                            print("X%= {}%".format(int(100.0 * x / width)))
+                            print("Y%= {}%".format(int(100.0 * y / height)))
+                            print("On x=", x, "y=", y, "Color=", r, g, b)
+
+                            currentX = xOrigin + (x * scalingFactor * 1)
+                            currentY = yOrigin + (y * scalingFactor * -1)
+
+                            if (done):
+                                if (r == 255 and g == 0 and b == 0 and colors[i]== "RED"):  # RED
+                                    myRobot.zTouching=myRobot.zR
+                                    if (myRobot.lastTool=="tool_red"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
+                                            print("point")
+                                elif (r == 0 and g == 255 and b == 0 and colors[i]== "GREEN"):  # GREEN
+                                    myRobot.zTouching=myRobot.zG
+                                    if (myRobot.lastTool=="tool_green"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
+                                            print("point")
+                                elif (r == 0 and g == 0 and b == 255   and colors[i]=="BLUE"):  # BLUE
+                                    myRobot.zTouching=myRobot.zB
+                                    if (myRobot.lastTool=="tool_blue"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
+                                            print("point")
+                                elif (r == 0 and g == 255 and b == 255   and colors[i]=="CYAN"):  # CYAN
+                                    if (myRobot.lastTool=="tool_red"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
+                                            print("point")
+                                elif (r == 255 and g == 0 and b == 255   and colors[i]=="MAGENTA"):  # MAGENTA
+                                    if (myRobot.lastTool=="tool_green"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
+                                            print("point")
+                                elif (r == 255 and g == 255 and b == 0   and colors[i]=="YELLOW"):  # YELLOW
+                                    if (myRobot.lastTool=="tool_blue"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
+                                            print("point")
+                                elif (r == 0 and g == 0 and b == 0  and colors[i]== "BLACK"):  # BLACK
+                                    if (myRobot.lastTool=="tool_red"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
+                                            print("point")
+                                elif (r == 165 and g == 42 and b == 42   and colors[i]=="BROWN"):  # BROWN
+                                    if (myRobot.lastTool=="tool_green"):
+                                        if myRobot.moveXY(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
+                                            print("point")
+                                else:  # SKIP
+                                    done=1
             else:
                 print("mode ERROR")
     else:
@@ -417,7 +503,7 @@ def main_node():
             #GOT TO 65 57
 
             
-            result = myRobot.move(-.8, -.7, .05, 0, 180, 0, "tool_red")
+            result = myRobot.move(-.75, -.72, .04, 0, 180, 0, "tool_red")
 
 
             print(result)
