@@ -13,8 +13,8 @@ Jacob Remz
 
 <img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png" width="200" height="200">
 <img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMO.gif" width="200" height="200">
-<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/IMG_20181214_150729.jpg" width="200" height="200">
-
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/IMG_20181214_150729.jpg" width="300" height="300">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOfinal.png" width="400" height="400">
 
 
 
