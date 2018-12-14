@@ -10,13 +10,10 @@ Nikolas Gamarra
 Ryan O'Brien
 Jacob Remz
 
-![alt text](https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png | width=100)
-![alt text](https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMO.gif | width=100)
-![alt text](https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/IMG_20181214_150729.jpg | width=100)
 
-<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png" width="100" height="100">
-<img src="https://your-image-url.type" width="100" height="100">
-<img src="https://your-image-url.type" width="100" height="100">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png" width="200" height="200">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMO.gif" width="200" height="200">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/IMG_20181214_150729.jpg" width="200" height="200">
 
 
 
