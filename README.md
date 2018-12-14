@@ -10,6 +10,7 @@ Nikolas Gamarra
 Ryan O'Brien
 Jacob Remz
 
+![alt text](https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png)
 
 
 ## ROS nodes and their launch files
