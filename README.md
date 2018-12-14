@@ -10,6 +10,8 @@ Nikolas Gamarra
 Ryan O'Brien
 Jacob Remz
 
+[Timelapse Video](https://www.youtube.com/watch?v=G_SPY3HaElo)
+[Tool Change Video](https://www.youtube.com/watch?v=UiV1uYzQe38)
 
 <img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png" width="200" height="200">
 <img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMO.gif" width="200" height="200">
