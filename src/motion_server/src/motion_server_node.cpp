@@ -114,7 +114,7 @@ class MoveRobotAction
 
 
 //TEST ZONE
-      int mode=3;
+      int mode=goal->mode;
 
       int visualize=0;
 double status;
@@ -178,7 +178,7 @@ poseClear.position.z=.04;//magic
 
 poseTouch.position.x=goal->x;
 poseTouch.position.y=goal->y;
-poseTouch.position.z=.02;//magic
+poseTouch.position.z=.015;//magic
 
 ROS_WARN("MODE 3");
 

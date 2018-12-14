@@ -23,9 +23,9 @@ class Robot:
             #.02 green
             #.02 red
     zZ = .015
-    zR = .02
-    zG = .02
-    zB = .02
+    zR = .015#was .02
+    zG = .015
+    zB = .015
     lastX = 0
     lastY = -.8
     lastZ = .4
@@ -37,20 +37,20 @@ class Robot:
     zTouching = .015
 
     ## values for RGB
-    #offsetXR = 0
-    #offsetYR = 0
-    #offsetXG = .002
-    #offsetYG = .002
-    #offsetXB = -.0005
-    #offsetYB = .002
-
-    ## valuse for Black Cyan Yellow
     offsetXR = 0
     offsetYR = 0
-    offsetXG = 0.0005
-    offsetYG = 0.0005
-    offsetXB = -0.001
-    offsetYB = 0.0025
+    offsetXG = .001
+    offsetYG = .002
+    offsetXB = -.0005
+    offsetYB = .003
+
+    ## valuse for Black Cyan Yellow
+    #offsetXR = 0
+    #offsetYR = 0
+    #offsetXG = 0.000385+.00005
+    #offsetYG = 0.0015
+    #offsetXB = -0.00215
+    #offsetYB = 0.0035
 
 
 
@@ -158,7 +158,7 @@ class Robot:
         self.client.wait_for_result()
         return self.client.get_result()
 
-    def move(self, x, y, z, roll, pitch, yaw, tool,2):
+    def move(self, x, y, z, roll, pitch, yaw, tool):
 
         self.lastX = x
         self.lastY = y
@@ -173,7 +173,7 @@ class Robot:
         self.client.wait_for_server()
 
         # Creates a goal to send to the action server.
-        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, roll, pitch, yaw, tool)
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, roll, pitch, yaw, tool,2)
         # goal = motion_msgs.msg.MoveRobotGoal()
         # goal.z=.4
 
@@ -196,7 +196,7 @@ class Robot:
         self.client.wait_for_server()
 
         # Creates a goal to send to the action server.
-        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, roll, pitch, yaw, tool,3)
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, self.lastZ, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool,3)
         # goal = motion_msgs.msg.MoveRobotGoal()
         # goal.z=.4
 
@@ -228,8 +228,8 @@ def main_node():
         print("debug is false")
         mode="eachcolorfast"
 
-        xOrigin = -.75+.1  # rospy.get_param('workcell/canvas_x') -.75
-        yOrigin = -.72  # rospy.get_param('workcell/canvas_y') -.72
+        xOrigin = -.78#+.15  # rospy.get_param('workcell/canvas_x') -.75
+        yOrigin = -.72#+.15  # rospy.get_param('workcell/canvas_y') -.72
         boardz = rospy.get_param('workcell/canvas_z')
 
         scalingFactor = .004  # 1=Meter .01=cm
@@ -238,7 +238,8 @@ def main_node():
         currentTool = "tool_red"
 
         scriptDir = os.path.dirname(__file__)
-        fileName="7X7CalCY.png"
+        fileName="BMOtrace2.png"
+        #fileName="3X3Cal.png"
         impath = os.path.join(scriptDir, '../../../../seurobot_ws/image_script/')
         print("reading image")
         img = Image.open(impath+fileName)
@@ -248,18 +249,18 @@ def main_node():
         # painter.move(boardx, boardy, zClearance, 0 , 180, 0, currentTool)
         print("Moving to origin")
 
-        done = myRobot.move(xOrigin, yOrigin, .4, 0, 180, 0, "tool_red")
+        done = myRobot.move(xOrigin, yOrigin, .2, 0, 180, 0, "tool_red")
 
         colors = [
             "WHITE",
-            "BLACK",
+            #"BLACK",
 
-            #"BLUE",
-            #"RED",
-            #"GREEN",
-             "CYAN",
+            "BLUE",
+            "RED",
+            "GREEN",
+            # "CYAN",
             # "MAGENTA",
-             "YELLOW",
+            # "YELLOW",
             # "BROWN"
         ]
         print("waiting..")
@@ -439,6 +440,11 @@ def main_node():
                         myRobot.changeTool("tool_blue")
                     print("STARTING RUN")
 
+
+
+
+                    ## x22 y 4
+
                     for x in range(width):
                         for y in range(height):
                             r, g, b = img.getpixel((x, y))
@@ -467,8 +473,8 @@ def main_node():
                                         if myRobot.drawPoint(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
                                             print("point")
                                 elif (r == 0 and g == 255 and b == 255   and colors[i]=="CYAN"):  # CYAN
-                                    if (myRobot.lastTool=="tool_red"):
-                                        if myRobot.drawPoint(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
+                                    if (myRobot.lastTool=="tool_green"):
+                                        if myRobot.drawPoint(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             print("point")
                                 elif (r == 255 and g == 0 and b == 255   and colors[i]=="MAGENTA"):  # MAGENTA
                                     if (myRobot.lastTool=="tool_green"):
@@ -511,7 +517,7 @@ def main_node():
             #GOT TO 65 57
 
             
-            result = myRobot.move(-.75, -.72, .4, 0, 180, 0, "tool_red")
+            result = myRobot.move(-.78, -.72, .4015, 0, 180, 0, "tool_red")
 
 
             print(result)
