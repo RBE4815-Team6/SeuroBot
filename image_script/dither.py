@@ -1,6 +1,6 @@
 # from tkinter import *
 from PIL import Image
-#import Image
+# import Image
 
 ERROR_FACTOR = 1.0
 
@@ -211,8 +211,8 @@ def main():
     YELLOW = Color(255.0, 255.0, comp)
     BROWN = Color(165.0, 42.0, 42.0)
     LIGHTBROWN = Color(180.0, 101.0, 29.0)
-    ORANGE = Color(255.0,165.0,0.0)
-    PINK = Color(255.0,24.0,148.0)
+    ORANGE = Color(255.0, 165.0, 0.0)
+    PINK = Color(255.0, 24.0, 148.0)
 
     colors = [
         WHITE,
@@ -221,12 +221,12 @@ def main():
         BLUE,
         GREEN,
         CYAN,
-        #MAGENTA,
-        #YELLOW,
-        #BROWN,
-        #LIGHTBROWN,
-        #ORANGE,
-        #PINK
+        # MAGENTA,
+        # YELLOW,
+        # BROWN,
+        # LIGHTBROWN,
+        # ORANGE,
+        # PINK
     ]
 
     """

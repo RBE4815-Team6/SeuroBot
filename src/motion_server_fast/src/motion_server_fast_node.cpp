@@ -115,17 +115,16 @@ class MoveRobotFastAction
 
 //TEST ZONE
 
-geometry_msgs::Pose poseA;
-geometry_msgs::Pose poseB;
-geometry_msgs::Pose poseC;
-geometry_msgs::Pose poseD;
+      geometry_msgs::Pose poseA;
+      geometry_msgs::Pose poseB;
+      geometry_msgs::Pose poseC;
+      geometry_msgs::Pose poseD;
 
 
       quaternionTFToMsg(q_rot,poseA.orientation);
       quaternionTFToMsg(q_rot,poseB.orientation);
       quaternionTFToMsg(q_rot,poseC.orientation);
       quaternionTFToMsg(q_rot,poseD.orientation);
-
 
 
       poseA.position.x= 0.0;
@@ -149,18 +148,25 @@ geometry_msgs::Pose poseD;
       int mode=2;
 
       int visualize=0;
+
+
 double status;
       moveit_msgs::RobotTrajectory trajectory;
 
       move_group.setPoseReferenceFrame(base_frame);
 
+      // Mode 1 plans motion for a single point, used for testing
       if(mode==1){
 	move_group.setPoseTarget(move_target);
 
 	int status;
 	move_group.move();
 	success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
-      }else if(mode==2){
+      }
+
+      //Mode 2 executes as many points as it recieves with linear motion planning
+      //moves to 'touch' point between each point
+      else if(mode==2){
 
 	std::vector< geometry_msgs::Pose > poses;
 
@@ -176,9 +182,6 @@ double status;
 	poses.push_back(poseB);
 	poses.push_back(poseC);
 	poses.push_back(poseD);
-
-
-
 
 
 	status=	move_group.computeCartesianPath(poses, 0.005, 0.0, trajectory, true);
@@ -200,8 +203,6 @@ double status;
       }
 
 
-
-
       /*
 	 if (status>0.0){
 	 success=true;
@@ -212,8 +213,7 @@ double status;
        */
 
 
-
-      //____EX looped exicution with preemption
+      //____EX looped execution with preemption
       // check that preempt has not been requested by the client
       if (as_.isPreemptRequested() || !ros::ok())
       {

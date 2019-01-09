@@ -19,11 +19,11 @@ from force_msgs.msg import LoadCellForces32
 
 class Robot:
 
-        #.015 blue
-            #.02 green
-            #.02 red
+    # .015 blue
+    # .02 green
+    # .02 red
     zZ = .015
-    zR = .015#was .02
+    zR = .015  # was .02
     zG = .015
     zB = .015
     lastX = 0
@@ -36,7 +36,7 @@ class Robot:
     zClearance = .04
     zTouching = .015
 
-    ## values for RGB
+    # values for RGB
     offsetXR = 0
     offsetYR = 0
     offsetXG = .001
@@ -44,14 +44,13 @@ class Robot:
     offsetXB = -.0005
     offsetYB = .003
 
-    ## valuse for Black Cyan Yellow
-    #offsetXR = 0
-    #offsetYR = 0
-    #offsetXG = 0.000385+.00005
-    #offsetYG = 0.0015
-    #offsetXB = -0.00215
-    #offsetYB = 0.0035
-
+    # values for Black Cyan Yellow
+    # offsetXR = 0
+    # offsetYR = 0
+    # offsetXG = 0.000385+.00005
+    # offsetYG = 0.0015
+    # offsetXB = -0.00215
+    # offsetYB = 0.0035
 
 
     def __init__(self):
@@ -66,10 +65,10 @@ class Robot:
         abortThresh = .5
         # print (data)
 
-        if (data.cellA > zeroThresh or data.cellB > zeroThresh or data.cellC > zeroThresh):
+        if data.cellA > zeroThresh or data.cellB > zeroThresh or data.cellC > zeroThresh:
             print(data.cellA)
 
-        if (data.cellA > abortThresh or data.cellB > abortThresh or data.cellC > abortThresh):
+        if data.cellA > abortThresh or data.cellB > abortThresh or data.cellC > abortThresh:
             ROS_WARN("Too much force!")
             self.client.cancel_all_goals()
 
@@ -79,7 +78,7 @@ class Robot:
 
         # Creates a goal to send to the action server.
         goal = motion_msgs.msg.MoveRobotGoal(self.lastX, self.lastY, self.zClearance, self.lastRoll, self.lastPitch,
-                                             self.lastYaw, self.lastTool,2)
+                                             self.lastYaw, self.lastTool, 2)
 
         # Sends the goal to the action server.
         self.client.send_goal(goal)
@@ -94,7 +93,7 @@ class Robot:
 
         # Creates a goal to send to the action server.
         goal = motion_msgs.msg.MoveRobotGoal(self.lastX, self.lastY, self.zTouching, self.lastRoll, self.lastPitch,
-                                             self.lastYaw, self.lastTool,2)
+                                             self.lastYaw, self.lastTool, 2)
 
         # Sends the goal to the action server.
         self.client.send_goal(goal)
@@ -113,16 +112,16 @@ class Robot:
 
         # Creates a goal to send to the action server.
 
-        #if(tool=="tool_red"):
-            #tool="tool_change_red"
-        #if(tool=="tool_green"):
-            #tool="tool_change_green"
-        #if(tool=="tool_blue"):
-            #tool="tool_change_blue"
+        # if(tool=="tool_red"):
+            # tool="tool_change_red"
+        # if(tool=="tool_green"):
+            # tool="tool_change_green"
+        # if(tool=="tool_blue"):
+            # tool="tool_change_blue"
 
         # Z sad
         goal = motion_msgs.msg.MoveRobotGoal(self.lastX, self.lastY, .4, self.lastRoll, self.lastPitch,
-                                             self.lastYaw, tool,2)
+                                             self.lastYaw, tool, 2)
 
         # Sends the goal to the action server.
         self.client.send_goal(goal)
@@ -137,7 +136,7 @@ class Robot:
         self.lastZ = z
 
         self.client.wait_for_server()
-        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool,2)
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool, 2)
         # Sends the goal to the action server.
         self.client.send_goal(goal)
 
@@ -150,7 +149,7 @@ class Robot:
         self.lastY = y
 
         self.client.wait_for_server()
-        goal = motion_msgs.msg.MoveRobotGoal(x, y, self.lastZ, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool,2)
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, self.lastZ, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool, 2)
         # Sends the goal to the action server.
         self.client.send_goal(goal)
 
@@ -173,7 +172,7 @@ class Robot:
         self.client.wait_for_server()
 
         # Creates a goal to send to the action server.
-        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, roll, pitch, yaw, tool,2)
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, z, roll, pitch, yaw, tool, 2)
         # goal = motion_msgs.msg.MoveRobotGoal()
         # goal.z=.4
 
@@ -182,21 +181,21 @@ class Robot:
 
         # client.cancel_all_goals()
         print("move")
-        #print(self.client.get_feedback())
+        # print(self.client.get_feedback())
         # Waits for the server to finish performing the action.
         self.client.wait_for_result()
         return self.client.get_result()
 
-    def drawPoint(self,x,y):
-        self.lastX=x
-        self.lastY=y
+    def drawPoint(self, x, y):
+        self.lastX = x
+        self.lastY = y
 
         # Waits until the action server has started up and started
         # listening for goals. (So the goals aren't ignored.)
         self.client.wait_for_server()
 
         # Creates a goal to send to the action server.
-        goal = motion_msgs.msg.MoveRobotGoal(x, y, self.lastZ, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool,3)
+        goal = motion_msgs.msg.MoveRobotGoal(x, y, self.lastZ, self.lastRoll, self.lastPitch, self.lastYaw, self.lastTool, 3)
         # goal = motion_msgs.msg.MoveRobotGoal()
         # goal.z=.4
 
@@ -205,12 +204,10 @@ class Robot:
 
         # client.cancel_all_goals()
         print("feedback")
-        #print(self.client.get_feedback())
+        # print(self.client.get_feedback())
         # Waits for the server to finish performing the action.
         self.client.wait_for_result()
         return self.client.get_result()
-
-
 
 
 def printImage():
@@ -224,12 +221,11 @@ def main_node():
 
     if (debug == False):
 
-
         print("debug is false")
         mode="eachcolorfast"
 
-        xOrigin = -.78#+.15  # rospy.get_param('workcell/canvas_x') -.75
-        yOrigin = -.72#+.15  # rospy.get_param('workcell/canvas_y') -.72
+        xOrigin = -.78  # +.15  # rospy.get_param('workcell/canvas_x') -.75
+        yOrigin = -.72  # +.15  # rospy.get_param('workcell/canvas_y') -.72
         boardz = rospy.get_param('workcell/canvas_z')
 
         scalingFactor = .004  # 1=Meter .01=cm
@@ -238,8 +234,8 @@ def main_node():
         currentTool = "tool_red"
 
         scriptDir = os.path.dirname(__file__)
-        fileName="BMOtrace2.png"
-        #fileName="3X3Cal.png"
+        fileName = "BMOtrace2.png"
+        # fileName="3X3Cal.png"
         impath = os.path.join(scriptDir, '../../../../seurobot_ws/image_script/')
         print("reading image")
         img = Image.open(impath+fileName)
@@ -253,7 +249,7 @@ def main_node():
 
         colors = [
             "WHITE",
-            #"BLACK",
+            # "BLACK",
 
             "BLUE",
             "RED",
@@ -265,10 +261,9 @@ def main_node():
         ]
         print("waiting..")
 
-
-        if (done):
+        if done:
             print("STARTING RUN")
-            if(mode=="inorder"):
+            if mode == "inorder":
                 for x in range(width):
                     for y in range(height):
                         r, g, b = img.getpixel((x, y))
@@ -280,15 +275,13 @@ def main_node():
                         currentX = xOrigin + (x * scalingFactor * 1)
                         currentY = yOrigin + (y * scalingFactor * -1)
 
-
-
                         done = myRobot.clear()
-                        if (done):
+                        if done:
                             done = myRobot.moveXY(currentX, currentY)
-                            if (done):
-                                if (r == 255 and g == 255 and b == 255 and "WHITE" in colors):  # WHITE
+                            if done:
+                                if r == 255 and g == 255 and b == 255 and "WHITE" in colors:  # WHITE
                                     done = 1
-                                elif (r == 255 and g == 0 and b == 0 and "RED" in colors):  # RED
+                                elif r == 255 and g == 0 and b == 0 and "RED" in colors:  # RED
                                     myRobot.zTouching=myRobot.zR
                                     if myRobot.changeTool("tool_red"):
                                         if myRobot.touch():
@@ -297,7 +290,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 0 and g == 255 and b == 0 and "GREEN" in colors):  # GREEN
+                                elif r == 0 and g == 255 and b == 0 and "GREEN" in colors:  # GREEN
                                     myRobot.zTouching=myRobot.zG
                                     if myRobot.changeTool("tool_green"):
                                         if myRobot.touch():
@@ -306,7 +299,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 0 and g == 0 and b == 255 and "BLUE" in colors):  # BLUE
+                                elif r == 0 and g == 0 and b == 255 and "BLUE" in colors:  # BLUE
                                     myRobot.zTouching=myRobot.zB
                                     if myRobot.changeTool("tool_blue"):
                                         if myRobot.touch():
@@ -315,7 +308,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 0 and g == 255 and b == 255 and "CYAN" in colors):  # CYAN
+                                elif r == 0 and g == 255 and b == 255 and "CYAN" in colors:  # CYAN
                                     if myRobot.changeTool("tool_red"):
                                         if myRobot.touch():
                                             myRobot.clear()
@@ -323,7 +316,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 255 and g == 0 and b == 255 and "MAGENTA" in colors):  # MAGENTA
+                                elif r == 255 and g == 0 and b == 255 and "MAGENTA" in colors:  # MAGENTA
                                     if myRobot.changeTool("tool_green"):
                                         if myRobot.touch():
                                             myRobot.clear()
@@ -331,7 +324,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 255 and g == 255 and b == 0 and "YELLOW" in colors):  # YELLOW
+                                elif r == 255 and g == 255 and b == 0 and "YELLOW" in colors:  # YELLOW
                                     if myRobot.changeTool("tool_blue"):
                                         if myRobot.touch():
                                             myRobot.clear()
@@ -339,7 +332,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 0 and g == 0 and b == 0 and "BLACK" in colors):  # BLACK
+                                elif r == 0 and g == 0 and b == 0 and "BLACK" in colors:  # BLACK
                                     if myRobot.changeTool("tool_red"):
                                         if myRobot.touch():
                                             myRobot.clear()
@@ -347,7 +340,7 @@ def main_node():
                                             print("ERROR: Couldn't touch")
                                     else:
                                         print("ERROR: Couldn't change tool")
-                                elif (r == 165 and g == 42 and b == 42 and "BROWN" in colors):  # BROWN
+                                elif r == 165 and g == 42 and b == 42 and "BROWN" in colors:  # BROWN
                                     if myRobot.changeTool("tool_green"):
                                         if myRobot.touch():
                                             myRobot.clear()
@@ -361,14 +354,14 @@ def main_node():
                                 print("ERROR: Couldn't move xy")
                         else:
                             print("ERROR: Couldn't clear")
-            elif (mode=="eachcolor"):
+            elif mode == "eachcolor":
                 for i in range(len(colors)):
                     print("Changing tool")
-                    if(colors[i]== "RED" or colors[i]=="NONE" or colors[i]=="BLACK"):
+                    if colors[i] == "RED" or colors[i] == "NONE" or colors[i] == "BLACK":
                         myRobot.changeTool("tool_red")
-                    elif(colors[i]== "GREEN" or colors[i]=="CYAN" or colors[i]=="BROWN"):
+                    elif colors[i] == "GREEN" or colors[i] == "CYAN" or colors[i] == "BROWN":
                         myRobot.changeTool("tool_green")
-                    elif(colors[i]=="BLUE" or colors[i]=="YELLOW"):
+                    elif colors[i] == "BLUE" or colors[i] == "YELLOW":
                         myRobot.changeTool("tool_blue")
                     print("STARTING RUN")
 
@@ -383,67 +376,66 @@ def main_node():
                             currentX = xOrigin + (x * scalingFactor * 1)
                             currentY = yOrigin + (y * scalingFactor * -1)
 
-                            if (done):
-                                if (r == 255 and g == 0 and b == 0 and colors[i]== "RED"):  # RED
+                            if done:
+                                if r == 255 and g == 0 and b == 0 and colors[i] == "RED":  # RED
                                     myRobot.zTouching=myRobot.zR
-                                    if (myRobot.lastTool=="tool_red"):
+                                    if myRobot.lastTool == "tool_red":
                                         if myRobot.moveXY(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 0 and g == 255 and b == 0 and colors[i]== "GREEN"):  # GREEN
+                                elif r == 0 and g == 255 and b == 0 and colors[i] == "GREEN":  # GREEN
                                     myRobot.zTouching=myRobot.zG
-                                    if (myRobot.lastTool=="tool_green"):
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.moveXY(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 0 and g == 0 and b == 255   and colors[i]=="BLUE"):  # BLUE
+                                elif r == 0 and g == 0 and b == 255 and colors[i] == "BLUE":  # BLUE
                                     myRobot.zTouching=myRobot.zB
-                                    if (myRobot.lastTool=="tool_blue"):
+                                    if myRobot.lastTool == "tool_blue":
                                         if myRobot.moveXY(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 0 and g == 255 and b == 255   and colors[i]=="CYAN"):  # CYAN
-                                    if (myRobot.lastTool=="tool_red"):
+                                elif r == 0 and g == 255 and b == 255 and colors[i] == "CYAN":  # CYAN
+                                    if myRobot.lastTool == "tool_red":
                                         if myRobot.moveXY(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 255 and g == 0 and b == 255   and colors[i]=="MAGENTA"):  # MAGENTA
-                                    if (myRobot.lastTool=="tool_green"):
+                                elif r == 255 and g == 0 and b == 255 and colors[i] == "MAGENTA":  # MAGENTA
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.moveXY(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 255 and g == 255 and b == 0   and colors[i]=="YELLOW"):  # YELLOW
-                                    if (myRobot.lastTool=="tool_blue"):
+                                elif r == 255 and g == 255 and b == 0 and colors[i] == "YELLOW":  # YELLOW
+                                    if myRobot.lastTool == "tool_blue":
                                         if myRobot.moveXY(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 0 and g == 0 and b == 0  and colors[i]== "BLACK"):  # BLACK
-                                    if (myRobot.lastTool=="tool_red"):
+                                elif r == 0 and g == 0 and b == 0 and colors[i] == "BLACK":  # BLACK
+                                    if myRobot.lastTool == "tool_red":
                                         if myRobot.moveXY(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
                                             if myRobot.touch():
                                                 myRobot.clear()
-                                elif (r == 165 and g == 42 and b == 42   and colors[i]=="BROWN"):  # BROWN
-                                    if (myRobot.lastTool=="tool_green"):
+                                elif r == 165 and g == 42 and b == 42 and colors[i] == "BROWN":  # BROWN
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.moveXY(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             if myRobot.touch():
                                                 myRobot.clear()
                                 else:  # SKIP
-                                    done=1
-            elif (mode=="eachcolorfast"):
+                                    done = 1
+
+            elif mode == "eachcolorfast":
                 for i in range(len(colors)):
                     print("Changing tool")
-                    if(colors[i]== "RED" or colors[i]=="X" or colors[i]=="BLACK"):
+                    if colors[i] == "RED" or colors[i] == "X" or colors[i] == "BLACK":
                         myRobot.changeTool("tool_red")
-                    elif(colors[i]== "GREEN" or colors[i]=="CYAN" or colors[i]=="BROWN"):
+                    elif colors[i] == "GREEN" or colors[i] == "CYAN" or colors[i] == "BROWN":
                         myRobot.changeTool("tool_green")
-                    elif(colors[i]=="BLUE" or colors[i]=="YELLOW"):
+                    elif colors[i] == "BLUE" or colors[i] == "YELLOW":
                         myRobot.changeTool("tool_blue")
                     print("STARTING RUN")
 
 
-
-
-                    ## x22 y 4
+                    # x22 y 4
 
                     for x in range(width):
                         for y in range(height):
@@ -456,44 +448,44 @@ def main_node():
                             currentX = xOrigin + (x * scalingFactor * 1)
                             currentY = yOrigin + (y * scalingFactor * -1)
 
-                            if (done):
-                                if (r == 255 and g == 0 and b == 0 and colors[i]== "RED"):  # RED
-                                    myRobot.zTouching=myRobot.zR
-                                    if (myRobot.lastTool=="tool_red"):
+                            if done:
+                                if r == 255 and g == 0 and b == 0 and colors[i] == "RED":  # RED
+                                    myRobot.zTouching = myRobot.zR
+                                    if myRobot.lastTool == "tool_red":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
                                             print("point")
-                                elif (r == 0 and g == 255 and b == 0 and colors[i]== "GREEN"):  # GREEN
-                                    myRobot.zTouching=myRobot.zG
-                                    if (myRobot.lastTool=="tool_green"):
+                                elif r == 0 and g == 255 and b == 0 and colors[i] == "GREEN":  # GREEN
+                                    myRobot.zTouching = myRobot.zG
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             print("point")
-                                elif (r == 0 and g == 0 and b == 255   and colors[i]=="BLUE"):  # BLUE
-                                    myRobot.zTouching=myRobot.zB
-                                    if (myRobot.lastTool=="tool_blue"):
+                                elif r == 0 and g == 0 and b == 255 and colors[i] == "BLUE":  # BLUE
+                                    myRobot.zTouching = myRobot.zB
+                                    if myRobot.lastTool == "tool_blue":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
                                             print("point")
-                                elif (r == 0 and g == 255 and b == 255   and colors[i]=="CYAN"):  # CYAN
-                                    if (myRobot.lastTool=="tool_green"):
+                                elif r == 0 and g == 255 and b == 255 and colors[i] == "CYAN":  # CYAN
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             print("point")
-                                elif (r == 255 and g == 0 and b == 255   and colors[i]=="MAGENTA"):  # MAGENTA
-                                    if (myRobot.lastTool=="tool_green"):
+                                elif r == 255 and g == 0 and b == 255 and colors[i] == "MAGENTA":  # MAGENTA
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             print("point")
-                                elif (r == 255 and g == 255 and b == 0   and colors[i]=="YELLOW"):  # YELLOW
-                                    if (myRobot.lastTool=="tool_blue"):
+                                elif r == 255 and g == 255 and b == 0 and colors[i] == "YELLOW":  # YELLOW
+                                    if myRobot.lastTool == "tool_blue":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXB, currentY+myRobot.offsetYB):
                                             print("point")
-                                elif (r == 0 and g == 0 and b == 0  and colors[i]== "BLACK"):  # BLACK
-                                    if (myRobot.lastTool=="tool_red"):
+                                elif r == 0 and g == 0 and b == 0 and colors[i] == "BLACK":  # BLACK
+                                    if myRobot.lastTool == "tool_red":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXR, currentY+myRobot.offsetYR):
                                             print("point")
-                                elif (r == 165 and g == 42 and b == 42   and colors[i]=="BROWN"):  # BROWN
-                                    if (myRobot.lastTool=="tool_green"):
+                                elif r == 165 and g == 42 and b == 42 and colors[i] == "BROWN":  # BROWN
+                                    if myRobot.lastTool == "tool_green":
                                         if myRobot.drawPoint(currentX+myRobot.offsetXG, currentY+myRobot.offsetYG):
                                             print("point")
                                 else:  # SKIP
-                                    done=1
+                                    done = 1
             else:
                 print("mode ERROR")
     else:
@@ -508,17 +500,15 @@ def main_node():
             # z .0225 blue
 
             # x-.4 y-1.2
-            #.015 blue
-            #.02 green
-            #.02 red
+            # .015 blue
+            # .02 green
+            # .02 red
 
             # x-.5 y-1
 
-            #GOT TO 65 57
+            # GOT TO 65 57
 
-            
             result = myRobot.move(-.78, -.72, .4015, 0, 180, 0, "tool_red")
-
 
             print(result)
 
