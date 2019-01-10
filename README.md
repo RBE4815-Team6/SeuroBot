@@ -10,7 +10,15 @@ Nikolas Gamarra
 Ryan O'Brien
 Jacob Remz
 
-![alt text](https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png)
+[Timelapse Video](https://www.youtube.com/watch?v=G_SPY3HaElo)
+
+[Tool Change Video](https://www.youtube.com/watch?v=UiV1uYzQe38)
+
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOtrace.png" width="200" height="200">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMO.gif" width="200" height="200">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/IMG_20181214_150729.jpg" width="300" height="300">
+<img src="https://github.com/RBE4815-Team6/Seurobot/blob/master/image_script/BMOfinal.png" width="400" height="400">
+
 
 
 ## ROS nodes and their launch files
