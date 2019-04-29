@@ -1,13 +1,13 @@
 # Seurobot
-Seurobot a program designed to creat pointilist art using and industrial robotic arm and ROS Industrial. This was the final term project for an Industrial Robotics class.
+Seurobot a program designed to create pointilist art using and industrial robotic arm and ROS Industrial. This was the final term project for an Industrial Robotics class.
 
 Worcester Polotechnic Institute (WPI) RBE 4815: Industrial Robotics B18
 Professor/Advisor: Craig Putnam
 
 Student Team 6:
-Hannah Baez
-Nikolas Gamarra
-Ryan O'Brien
+Hannah Baez,
+Nikolas Gamarra,
+Ryan O'Brien,
 Jacob Remz
 
 [Timelapse Video](https://www.youtube.com/watch?v=G_SPY3HaElo)
